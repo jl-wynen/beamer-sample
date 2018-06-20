@@ -1,0 +1,75 @@
+% option to add title in footline
+\newif\if@themeaiphi@titleinfoot
+\@themeaiphi@titleinfootfalse
+\DeclareOption{titleinfoot}{\@themeaiphi@titleinfoottrue}
+
+\ProcessOptions
+
+\mode<presentation>
+
+% requirements
+\RequirePackage{tikz}
+
+
+% frametitle
+\setbeamertemplate{frametitle} {
+  \nointerlineskip
+  \begin{beamercolorbox}[sep=0.12cm,ht=1.3em,wd=\paperwidth]{frametitle}
+    \vbox{}\vskip-2ex%
+    \strut\centering\insertframetitle\strut
+    \vskip-0.8ex%
+  \end{beamercolorbox}
+}
+
+% basic footline
+\if@themeaiphi@titleinfoot
+  % show title
+  \setbeamertemplate{footline} {
+    \leavevmode%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+        \usebeamerfont{author in head/foot}\insertshortauthor{}
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.50\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle{}
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{1em}|\hspace*{1em}
+        \insertframenumber{}\hspace*{2ex} % TODO
+      \end{beamercolorbox}}%
+    \vskip0pt%
+  }
+
+\else
+  % don't show title
+  \setbeamertemplate{footline} {
+    \leavevmode%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.50\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+        \usebeamerfont{author in head/foot}\hspace*{3em}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.50\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{1.5em}|\hspace*{1.5em}
+        \insertframenumber{}\hspace*{3em}
+      \end{beamercolorbox}}%
+    \vskip0pt%
+  }
+\fi
+
+% add a progress bar over footline
+\newlength{\aiphi@progressinheadfoot}
+\setbeamertemplate{progress bar in head/foot}{
+  \nointerlineskip{}
+  \setlength{\aiphi@progressinheadfoot}{%
+    \paperwidth*\ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+  }%
+  \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+    \begin{tikzpicture}
+      \draw[bg, fill=bg] (0,0) rectangle (\paperwidth, 0.2em);
+      \draw[fg, fill=fg] (0,0) rectangle (\aiphi@progressinheadfoot, 0.2em);
+    \end{tikzpicture}%
+  \end{beamercolorbox}
+}
+\addtobeamertemplate{footline}{\usebeamertemplate*{progress bar in head/foot}}{}
+
+\mode<all>

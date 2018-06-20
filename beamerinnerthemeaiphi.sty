@@ -1,0 +1,35 @@
+\mode<presentation>
+
+% requirements
+\RequirePackage{adforn} % for arrowheads
+
+% title page
+\setbeamertemplate{title page} {
+  \renewcommand*\item{\olditem[]}
+  \thispagestyle{empty}
+  \vskip0pt plus 1filll
+  \begin{center}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\\[3ex]
+    \insertauthor\\[2ex]
+    \insertdate\\[8ex]
+    {\small\insertinstitute}
+  \end{center}
+  \vskip0pt plus 1filll
+  \renewcommand*\item{\olditem[\adfrightarrowhead]}
+}
+
+% setup table of contents
+\setbeamertemplate{section in toc}{%
+  {\usebeamercolor[fg]{section number in toc}\inserttocsectionnumber.}~{\usebeamercolor[fg]{section in toc}\inserttocsection}}
+\setbeamertemplate{subsection in toc}{%
+  \hspace{1.2em}{\usebeamercolor[fg]{subsection number in toc}\inserttocsectionnumber.\inserttocsubsectionnumber.}~{\usebeamercolor[fg]{subsection in toc}\inserttocsubsection}\par}
+
+% do not show navigation stuff in bottom right corner
+\setbeamertemplate{navigation symbols}{}
+
+% set itemize bullets
+\setbeamertemplate{itemize item}{\adfrightarrowhead}
+\setbeamertemplate{itemize subitem}{--}
+\setbeamertemplate{itemize subsubitem}{-}
+
+\mode<all>

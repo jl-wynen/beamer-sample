@@ -1,0 +1,36 @@
+% option to add title in footline
+\newif\if@themeaiphi@titleinfoot
+\@themeaiphi@titleinfootfalse
+\DeclareOption{titleinfoot}{\@themeaiphi@titleinfoottrue}
+
+% option to show toc before every section
+\newif\if@themeaiphi@toc
+\@themeaiphi@tocfalse
+\DeclareOption{toc}{\@themeaiphi@toctrue}
+
+\ProcessOptions{}
+
+\mode<presentation>
+
+% load sub packages
+\usecolortheme{aiphi}
+\useinnertheme{aiphi}
+\if@themeaiphi@titleinfoot
+  \useoutertheme[titleinfoot]{aiphi}
+\else
+  \useoutertheme{aiphi}
+\fi
+
+% enable toc before every section if option is set
+\if@themeaiphi@toc
+\setcounter{tocdepth}{1}  % hide subsections from toc
+\AtBeginSection[]
+{
+  \subsection{Contents}
+  \begin{frame}<beamer>
+  \tableofcontents[currentsection]
+  \end{frame}
+}
+\fi
+
+\mode<all>
