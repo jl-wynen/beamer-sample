@@ -51,7 +51,52 @@
 \end{frame}
 
 \section{Second}
-\begin{frame}
+% we need fragile so the code listing can position itself properly
+\begin{frame}[fragile]\frametitle{Code!}
+  % language is C++ by default
+  \begin{lstlisting}[caption={A test C++ listing}]
+// Some nice semi-meta function
+template <typename It,
+          template <typename...> class F,
+          typename... TParam>
+struct foreach {
+  template <typename... Args>
+  static void f(Args && ...args) {
+    /* magic! */
+    _internal::foreach_impl<typename It::Head,
+                            typename It::Tail,
+                            F,
+                            TParam...>
+        ::f(std::forward<Args>(args)...);
+
+    std::cout << "Just testing syntax highlighting\n";
+    const char c = 'c';
+    std::vector<int> v{3};  // what is the length of this?
+  }
+};
+  \end{lstlisting}
+\end{frame}
+
+% fragile again (see above)
+\begin{frame}[fragile]\frametitle{\texttt{Python} code}
+  % set language of next listing
+  \lstset{language=python}
+  \begin{lstlisting}[caption={Some Python as well}]
+# a hat in a cat
+class cat:
+  """A cat shaped like an arbitrary hat"""
+
+  def __init__(self, shape):
+    self._shape = shape
+
+  def show(self):
+    # watch out for auto line breaks:
+    print(f"A {self._shape} shaped hat in a now {self._shape} shaped cat")
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}\frametitle{Blocks}
+  Quite nice but maybe boxes based on \texttt{tcolorbox} are better? See below.
   \begin{block}{A normal block}
     Some normal, boring text, but COLOURS!
   \end{block}
@@ -63,46 +108,8 @@
   \end{alertblock}
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Code!}
-  \begin{lstlisting}[caption={A test listing}]
-// Oh yeah, I did this!
-template <typename It,
-          template <typename...> class F,
-          typename... TParam>
-struct foreach {
-    /* magick! */
-    template <typename... Args>
-    static void f(Args && ...args) {
-        const char c = 'c';
-        _tmp_internal::foreach_impl<typename It::Head,
-                                    typename It::Tail,
-                                    F,
-                                    TParam...>
-                                    ::f("A string", std::forward<Args>(args)...);
-                                    std::cout << 'a' << std::endl;
-                                    std::vector<int> v(2, 3);
-    }
-};
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]\frametitle{Lazy box overlay}
-  \lstset{language=python}
-  \begin{lstlisting}[caption={Some Python as well}]
-# a hat in a cat
-class cat:
-    def __init__(self, shape):
-        self._shape = shape
-
-    def show(self):
-        print("A {} shaped hat in a now {} shaped cat".format(self._shape))
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}
-  Before block
-  \begin{textblock*}{200pt} (100pt,1pt)
+\begin{frame}\frametitle{Overlay boxes}
+  \begin{textblock*}{60mm} (10mm,20mm)
     \begin{itembox}{first block}
       \begin{itemize}
       \item And-a one
@@ -113,7 +120,7 @@ class cat:
   \end{textblock*}
 
   \only<2->{
-    \begin{textblock*}{200pt} (150pt,50pt)
+    \begin{textblock*}{60mm} (20mm,28mm)
       \begin{itembox}{second block}
         \begin{itemize}
         \item Foo
@@ -125,7 +132,7 @@ class cat:
   }
 
   \only<3>{
-    \begin{textblock*}{200pt} (200pt,100pt)
+    \begin{textblock*}{60mm} (30mm,36mm)
       \begin{itembox}{third block}
         \begin{itemize}
         \item En
@@ -136,7 +143,6 @@ class cat:
       \end{itembox}
     \end{textblock*}
   }
-  After block
 \end{frame}
 
 \begin{frame}\frametitle{Special boxes}
@@ -205,12 +211,12 @@ class cat:
 \appendix
 \backupbegin
 
-\begin{frame}
-  \frametitle{Appendix}
-  Some extra stuff
+\begin{frame}\frametitle{Appendix 1}
+  Some extra stuff\\[2ex]
+  Take a look at the progress bar!
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{Appendix 2}
   Even more extra stuff
 \end{frame}
 
