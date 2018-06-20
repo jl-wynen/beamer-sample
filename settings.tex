@@ -24,11 +24,11 @@
 \usepackage{color}
 \usepackage[xparse, skins]{tcolorbox}   % nice coloured boxes
 % for textblock, remove showboxes for release
-\usepackage[absolute,overlay]{textpos}
+\usepackage[absolute,overlay,showboxes]{textpos}
 
 %% devel only
 % overlay a grid over the slides
-% \usepackage[texcoord,grid,gridcolor=black!10,subgridcolor=black!5,gridunit=mm]{eso-pic}
+\usepackage[texcoord,grid,gridcolor=black!10,subgridcolor=black!5,gridunit=mm]{eso-pic}
 \usepackage{lipsum}
 
 
@@ -60,13 +60,13 @@
 % tcolorbox
 % box for itemizes
 \NewTColorBox{itembox}{m}{
-    title=#1,
-    noparskip,  % not using library parskip
-    left=1mm, right=3mm, bottom=3mm, top=3mm,  % less for left to account for itemize
-    sharp corners,
-    boxrule=0.5mm,
-    colframe=aiphiblue,
-    colback=white
+  title=#1,
+  noparskip,  % not using library parskip
+  left=1mm, right=3mm, bottom=3mm, top=3mm,  % less for left to account for itemize
+  sharp corners,
+  boxrule=0.5mm,
+  colframe=aiphiblue,
+  colback=white
 }
 
 % box with a fancy title
@@ -113,14 +113,25 @@
   coltitle=black
 }
 
+% a color box inside a textblock to allow for arbitrary positioning
+\newenvironment{aside}[2]{
+  \begin{textblock*}{#1} (#2)
+    \begin{tcolorbox}[
+      enhanced,
+      noparskip,  % not using library parskip
+      left=1mm, right=1mm, bottom=1mm, top=1mm,
+      sharp corners,
+      boxrule=0.01mm,
+      colback=aiphiyellow,
+      coltext=black!80!white,
+      watermark tikz={\draw[line width=2mm] circle (1cm) node{\fontfamily{ptm}\fontseries{b}\fontsize{20mm}{20mm}\selectfont!};},
+      ]
+    }
+    {\end{tcolorbox}\end{textblock*}}
 
 % ----------------------------------------------------------
 % TikZ
 \usetikzlibrary{tikzmark, calc}
-% remember all external nodes to reference them later
-\tikzstyle{every picture}+=[remember picture]
-% use display style math in TikZ nodes
-% \everymath{\displaystyle}
 
 
 %----------------------------------------------------------
