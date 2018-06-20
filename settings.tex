@@ -1,27 +1,26 @@
+% basic text processing/formatting
 \usepackage{ucs}                % more unicode
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 
+% maths stuff
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage{slashed}
+\usepackage{slashed}            % (Feynman-) slashed symbols
 \usepackage{commath}            % for nicer differentials
 \usepackage{bm}                 % bold math
-\usepackage{dsfont}
-\usepackage{latexsym}
+\usepackage{dsfont}             % double stroked characters
 
-\usepackage{tikz}
-\usepackage{calc}
-\usepackage{datetime}
+\usepackage{tikz}               % drawing all manners of things
+\usepackage{datetime}           % for custom date and time format
 \usepackage{array}              % for matrices in math environment
 \usepackage{float}              % place graphics with "H"
-\usepackage{braket}
+\usepackage{braket}             % Dirac notation
 \usepackage{placeins}           % FloatBarrier
-\usepackage{listings}
-\usepackage{color}
+\usepackage{listings}           % source code listings
 \usepackage[xparse, skins]{tcolorbox}   % nice coloured boxes
 % for textblock, remove showboxes for release
 \usepackage[absolute,overlay,showboxes]{textpos}
@@ -37,10 +36,11 @@
 % ISO date format
 \newdateformat{isodate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
 
+% commands so we can refer to these later
 \newcommand{\theauthor}{Jan-Lukas Wynen}
 \newcommand{\theinstitute}{Institute for applied \LaTeX}
 \newcommand{\thetitle}{Fancy shmancy talk}
-\newcommand{\thesubtitle}{Does this subtitle appear anywhere}
+\newcommand{\thesubtitle}{Does this subtitle appear anywhere?}
 \newcommand{\thedate}{\isodate\today}
 
 \author{\theauthor}
@@ -52,8 +52,6 @@
 %----------------------------------------------------------
 % setup beamer
 \usetheme[titleinfoot, toc]{aiphi}
-
-% \setbeamertemplate{page number in head/foot}[appendixframenumber]
 
 
 %----------------------------------------------------------
@@ -134,6 +132,62 @@
 \usetikzlibrary{tikzmark, calc}
 
 
+% ----------------------------------------------------------
+% code listings
+% set typewriter font to courier
+\renewcommand{\ttdefault}{pcr}
+
+% Define a new language for C++ to have proper detection of built in datatypes.
+% I hope I got all keywords.
+\lstdefinelanguage{aiphicpp}{
+  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline, and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final},
+  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+% custom style for code listings
+\lstdefinestyle{aiphilst}{
+  language=aiphicpp,  % the default language
+  basicstyle=\scriptsize\ttfamily\color[RGB]{211,211,211},  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listin
+%
+  frame=l,                                  % frame around code, show only to the left
+  framerule=1.5pt,                          % frame width
+  rulecolor=\color{aiphibordeaux!75!white}, % colour of frame
+%
+  numbers=left,  % line numbers, one of none, left, right
+  numbersep=6pt, % distance of line numbers from code
+  numberstyle=\tiny\color{black},  % text style of line numbers
+%
+  backgroundcolor=\color[HTML]{282b2e},
+  commentstyle=\itshape\color[HTML]{8cbbad},
+  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
+  keywordstyle={[2]\color{aiphigreen!75!white}},
+  stringstyle=\color{aiphired!70!white},
+}
+% set this style as default
+\lstset{style=aiphilst}
+
+
+% ----------------------------------------------------------
+% handle backup / appendix slides
+% place these around backup slides so they are not counted by the progress bar
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+
+
 %----------------------------------------------------------
 % abbreviations
 \newcommand{\unit}[1]{\,\text{#1}}
@@ -146,51 +200,6 @@
 \renewcommand{\epsilon}{\varepsilon}
 
 \newcommand{\Tr}{\text{Tr}}
-
-
-% set typewriter font to courier
-\renewcommand{\ttdefault}{pcr}
-
-\lstdefinelanguage{aiphicpp}{
-  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final},
-  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
-  morecomment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]",
-  morestring=[b]'
-}
-
-\lstdefinestyle{aiphilst}{
-  language=aiphicpp,  % the default language
-  basicstyle=\scriptsize\ttfamily\color[RGB]{211,211,211},  % default font size
-  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
-  breaklines=true,
-  captionpos=b, % place captions under listing
-  frame=l,                         % frame around code, show only to the left
-  framerule=1.5pt,                 % frame width
-  rulecolor=\color{aiphibordeaux!75!white}, % colour of frame
-  numbers=left,  % line numbers, one of none, left, right
-  numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
-  backgroundcolor=\color[HTML]{282b2e},
-  commentstyle=\itshape\color[HTML]{8cbbad},
-  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
-  keywordstyle={[2]\color{aiphigreen!75!white}},
-  stringstyle=\color{aiphired!70!white},
-  showstringspaces=false,  % show marker at spaces in strings
-}
-
-\lstset{style=aiphilst}
-
-
-\newcommand{\backupbegin}{
-   \newcounter{framenumberappendix}
-   \setcounter{framenumberappendix}{\value{framenumber}}
-}
-\newcommand{\backupend}{
-   \addtocounter{framenumberappendix}{-\value{framenumber}}
-   \addtocounter{framenumber}{\value{framenumberappendix}}
-}
 
 
 % ----------------------------------------------------------
