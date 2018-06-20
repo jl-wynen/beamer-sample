@@ -87,7 +87,7 @@ struct foreach {
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[fragile]\frametitle{Lazy box overlay}
   \lstset{language=python}
   \begin{lstlisting}[caption={Some Python as well}]
 # a hat in a cat
@@ -139,7 +139,7 @@ class cat:
   After block
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{Special boxes}
   \begin{fancybox}{Testing...}
     \lipsum[2]
   \end{fancybox}
@@ -147,6 +147,51 @@ class cat:
   \begin{tagbox}{Title}{Tag}%[aiphired]
     Tagged stuff
   \end{tagbox}
+\end{frame}
+
+\begin{frame}\frametitle{Arrows}
+  % mark start node n1 and target node t1
+  Some text with a \tikzmark{n1}note\\[2ex]
+  Some more text with a \tikzmark{t1}ref in the middle.
+  % draw an arrow from n1 to t1
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[->] ([yshift=0.5ex]pic cs:n1) to[bend right] ([yshift=0.5ex]pic cs:t1);
+  \end{tikzpicture}
+
+  \vspace{3ex}
+  More fancy annotations:
+  \begin{align*}
+    \ket{\tikzmark{spin1}1, \tikzmark{magn1}m, \tikzmark{mom1}0} = \ldots
+  \end{align*}
+  % note the manual indent :/
+  \hspace{6em}\tikzmark{mom2}Momentum\\
+  \hspace{6em}\tikzmark{magn2}Spin projection\\
+  \hspace{6em}\tikzmark{spin2}Total spin
+
+  % draw lines and circles
+  % all with manual adjustment of positions
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw let
+      \p1 = ([xshift=3pt, yshift=-3pt]pic cs:spin1),
+      \p2 = ([xshift=-3pt, yshift=0.7ex]pic cs:spin2)
+    in
+      (\p1) .. controls (\x1,\y2) .. (\p2)
+      node[shape=circle, fill=black, inner sep=1pt] {};
+
+    \draw let
+      \p1 = ([xshift=4pt, yshift=-3pt]pic cs:magn1),
+      \p2 = ([xshift=-3pt, yshift=0.7ex]pic cs:magn2)
+    in
+      (\p1) .. controls (\x1,\y2) .. (\p2)
+      node[shape=circle, fill=black, inner sep=1pt] {};
+
+    \draw let
+      \p1 = ([xshift=3pt, yshift=-3pt]pic cs:mom1),
+      \p2 = ([xshift=-3pt, yshift=0.7ex]pic cs:mom2)
+    in
+      (\p1) .. controls (\x1,\y2) .. (\p2)
+      node[shape=circle, fill=black, inner sep=1pt] {};
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}[plain,c]

@@ -58,7 +58,6 @@
 
 %----------------------------------------------------------
 % tcolorbox
-
 % box for itemizes
 \NewTColorBox{itembox}{m}{
     title=#1,
@@ -113,6 +112,15 @@
   colbacktitle=white,
   coltitle=black
 }
+
+
+% ----------------------------------------------------------
+% TikZ
+\usetikzlibrary{tikzmark, calc}
+% remember all external nodes to reference them later
+\tikzstyle{every picture}+=[remember picture]
+% use display style math in TikZ nodes
+% \everymath{\displaystyle}
 
 
 %----------------------------------------------------------
