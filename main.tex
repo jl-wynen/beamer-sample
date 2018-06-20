@@ -1,0 +1,174 @@
+\documentclass[mathserif, fleqn]{beamer}
+\input{settings.tex}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{A section}
+\begin{frame}\frametitle{Overview}
+  % different bullets just for this slide
+  \setbeamertemplate{itemize item}{}
+  \setbeamertemplate{itemize subitem}{\adfrightarrowhead}
+  \setbeamertemplate{itemize subsubitem}{--}
+
+  \begin{itemize}\setlength{\itemsep}{1.5ex}
+  \item \textbf{Motivation}
+    \begin{itemize}\setlength{\itemsep}{1ex}
+    \item Latex is `fun'
+    \item Really nice slides if you put really much effort into it
+    \end{itemize}
+  \item \textbf{Method}
+    \begin{itemize}\setlength{\itemsep}{1ex}
+    \item Editor + PDFLatex
+    \item Ah, and PDF viewer
+      \begin{itemize}
+      \item Many choices
+      \item Pretty much all good
+      \end{itemize}
+    \end{itemize}
+  \item \textbf{Results}
+    \begin{itemize}\setlength{\itemsep}{1ex}
+    \item See for yourself
+    \item Looks nice, doesn't it?
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Conclusion}
+  \begin{itemize}\setlength{\itemsep}{2ex}
+  \item Woah, that was fast!
+    \begin{itemize}
+    \item Not much to show here anyway
+    \end{itemize}
+  \item But look, nice serifs in equations (optional... $uv$):
+    \begin{align*}
+      \mathcal{C} = \frac1{Z} \braket{0|\int\,\mathcal{D}\psi\,e^{\i S}|0}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\section{Second}
+\begin{frame}
+  \begin{block}{A normal block}
+    Some normal, boring text, but COLOURS!
+  \end{block}
+  \begin{exampleblock}{An example}
+    This is how you do it.
+  \end{exampleblock}
+  \begin{alertblock}{Careful now}
+    You should really watch out more!
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Code!}
+  \begin{lstlisting}[caption={A test listing}]
+// Oh yeah, I did this!
+template <typename It,
+          template <typename...> class F,
+          typename... TParam>
+struct foreach {
+    /* magick! */
+    template <typename... Args>
+    static void f(Args && ...args) {
+        const char c = 'c';
+        _tmp_internal::foreach_impl<typename It::Head,
+                                    typename It::Tail,
+                                    F,
+                                    TParam...>
+                                    ::f("A string", std::forward<Args>(args)...);
+                                    std::cout << 'a' << std::endl;
+                                    std::vector<int> v(2, 3);
+    }
+};
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \lstset{language=python}
+  \begin{lstlisting}[caption={Some Python as well}]
+# a hat in a cat
+class cat:
+    def __init__(self, shape):
+        self._shape = shape
+
+    def show(self):
+        print("A {} shaped hat in a now {} shaped cat".format(self._shape))
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  Before block
+  \begin{textblock*}{200pt} (100pt,1pt)
+    \begin{itembox}{first block}
+      \begin{itemize}
+      \item And-a one
+      \item And-a two
+      \item And-a
+      \end{itemize}
+    \end{itembox}
+  \end{textblock*}
+
+  \only<2->{
+    \begin{textblock*}{200pt} (150pt,50pt)
+      \begin{itembox}{second block}
+        \begin{itemize}
+        \item Foo
+        \item Bar
+        \item Baz
+        \end{itemize}
+      \end{itembox}
+    \end{textblock*}
+  }
+
+  \only<3>{
+    \begin{textblock*}{200pt} (200pt,100pt)
+      \begin{itembox}{third block}
+        \begin{itemize}
+        \item En
+        \item To
+        \item Tre
+        \item Fire
+        \end{itemize}
+      \end{itembox}
+    \end{textblock*}
+  }
+  After block
+\end{frame}
+
+\begin{frame}
+  \begin{fancybox}{Testing...}
+    \lipsum[2]
+  \end{fancybox}
+
+  \begin{tagbox}{Title}{Tag}%[aiphired]
+    Tagged stuff
+  \end{tagbox}
+\end{frame}
+
+\begin{frame}[plain,c]
+  % suppress strange item marker in center
+  \renewcommand*\item{\olditem[]}
+  \begin{center}
+    \textcolor{aiphired}{\LARGE Thank you for your attention!}
+  \end{center}
+\end{frame}
+
+\appendix
+\backupbegin
+
+\begin{frame}
+  \frametitle{Appendix}
+  Some extra stuff
+\end{frame}
+
+\begin{frame}
+  Even more extra stuff
+\end{frame}
+
+\backupend
+
+\end{document}

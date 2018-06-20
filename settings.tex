@@ -1,0 +1,186 @@
+\usepackage{ucs}                % more unicode
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{slashed}
+\usepackage{commath}            % for nicer differentials
+\usepackage{bm}                 % bold math
+\usepackage{dsfont}
+\usepackage{latexsym}
+
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{datetime}
+\usepackage{array}              % for matrices in math environment
+\usepackage{float}              % place graphics with "H"
+\usepackage{braket}
+\usepackage{placeins}           % FloatBarrier
+\usepackage{listings}
+\usepackage{color}
+\usepackage[xparse, skins]{tcolorbox}   % nice coloured boxes
+% for textblock, remove showboxes for release
+\usepackage[absolute,overlay,showboxes]{textpos}
+
+%% devel only
+% overlay a grid over the slides
+\usepackage[texcoord,grid,gridcolor=black!10,subgridcolor=black!5,gridunit=mm]{eso-pic}
+\usepackage{lipsum}
+
+
+%----------------------------------------------------------
+% general info
+% ISO date format
+\newdateformat{isodate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+
+\newcommand{\theauthor}{Jan-Lukas Wynen}
+\newcommand{\theinstitute}{Institute for applied \LaTeX}
+\newcommand{\thetitle}{Fancy shmancy talk}
+\newcommand{\thesubtitle}{Does this subtitle appear anywhere}
+\newcommand{\thedate}{\isodate\today}
+
+\author{\theauthor}
+\title{\thetitle}
+\date{\thedate}
+\institute{\theinstitute}
+
+
+%----------------------------------------------------------
+% setup beamer
+\usetheme[titleinfoot, toc]{aiphi}
+
+% \setbeamertemplate{page number in head/foot}[appendixframenumber]
+
+
+%----------------------------------------------------------
+% tcolorbox
+
+% box for itemizes
+\NewTColorBox{itembox}{m}{
+    title=#1,
+    noparskip,  % not using library parskip
+    left=1mm, right=3mm, bottom=3mm, top=3mm,  % less for left to account for itemize
+    sharp corners,
+    boxrule=0.5mm,
+    colframe=aiphiblue,
+    colback=white
+}
+
+% box with a fancy title
+\NewTColorBox{fancybox}{m}{
+  enhanced,
+  title=#1,
+  attach boxed title to top center={
+    yshift=-0.25mm-\tcboxedtitleheight/2,  % extra shift is 1/2 boxrule
+    yshifttext=1ex-\tcboxedtitleheight/2
+  },
+  boxed title style={ % draw wedges around the title
+    boxrule=0.5mm,
+    frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west)
+      -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east)
+      -- (frame.south east) -- (frame.south west) -- cycle; },
+    interior code={ \path[tcb fill interior] ([xshift=-2.5mm]interior.west)
+      -- (interior.north west) -- (interior.north east)
+      -- ([xshift=2.5mm]interior.east) -- (interior.south east) -- (interior.south west)
+      -- cycle;}
+  },
+  noparskip,
+  left=3mm, right=3mm, bottom=3mm,
+  sharp corners,
+  boxrule=0.5mm,
+  colframe=aiphiviolet,
+  colback=white,
+  colbacktitle=aiphiviolet!70!white,
+  coltitle=white
+}
+
+% box showing a tag besides the title
+% arguments: title, tag, tag background, tag foreground
+\NewTColorBox{tagbox}{m m O{black!80!white} O{white}}{
+  title=#1,
+  after title={\hfill\colorbox{#3}{\color{#4}#2}},
+  boxsep=0.5mm,
+  noparskip,
+  left=3mm, right=3mm, bottom=3mm, top=3mm,
+  sharp corners,
+  boxrule=0.5mm,
+  colframe=black!80!white,
+  colback=white,
+  colbacktitle=white,
+  coltitle=black
+}
+
+
+%----------------------------------------------------------
+% abbreviations
+\newcommand{\unit}[1]{\,\text{#1}}
+\newcommand{\ev}{\,\text{eV}}
+\newcommand{\kev}{\,\text{keV}}
+\newcommand{\mev}{\,\text{MeV}}
+\newcommand{\gev}{\,\text{GeV}}
+
+\renewcommand{\i}{\mathrm{i}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\Tr}{\text{Tr}}
+
+
+% set typewriter font to courier
+\renewcommand{\ttdefault}{pcr}
+
+\lstdefinelanguage{aiphicpp}{
+  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final},
+  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinestyle{aiphilst}{
+  language=aiphicpp,  % the default language
+  basicstyle=\scriptsize\ttfamily\color[RGB]{211,211,211},  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  captionpos=b, % place captions under listing
+  frame=l,                         % frame around code, show only to the left
+  framerule=1.5pt,                 % frame width
+  rulecolor=\color{aiphibordeaux!75!white}, % colour of frame
+  numbers=left,  % line numbers, one of none, left, right
+  numbersep=6pt, % distance of line numbers from code
+  numberstyle=\tiny\color{black},  % text style of line numbers
+  backgroundcolor=\color[HTML]{282b2e},
+  commentstyle=\itshape\color[HTML]{8cbbad},
+  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
+  keywordstyle={[2]\color{aiphigreen!75!white}},
+  stringstyle=\color{aiphired!70!white},
+  showstringspaces=false,  % show marker at spaces in strings
+}
+
+\lstset{style=aiphilst}
+
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+
+
+% ----------------------------------------------------------
+% miscellanious
+
+% remember current item command so we can switch back to it
+\let\olditem\item
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
