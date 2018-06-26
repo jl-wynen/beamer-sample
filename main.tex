@@ -17,17 +17,17 @@
   \begin{itemize}\setlength{\itemsep}{1.5ex}
   \item \textbf{Motivation}
     \begin{itemize}\setlength{\itemsep}{1ex}
-    \item Latex is `fun'
+    \item \LaTeX{} is `fun'
     \item Really nice slides if you put really much effort into it
     \end{itemize}
   \item \textbf{Method}
     \begin{itemize}\setlength{\itemsep}{1ex}
     \item Editor + PDFLatex
-    \item Ah, and PDF viewer
+    \item PDF viewer
       \begin{itemize}
       \item Many choices
-      \item Some good some less so
-      \item Watch out, sometime coloured areas aren't merged properly!
+      \item Some good, some less so
+      \item Watch out, sometimes coloured areas aren't merged properly!
       \end{itemize}
     \end{itemize}
   \item \textbf{Results}
@@ -64,6 +64,7 @@
 \end{frame}
 
 \section{Second}
+\subsection{First Sub}
 % we need fragile so the code listing can position itself properly
 \begin{frame}[fragile]\frametitle{Code!}
   % language is C++ by default
@@ -83,7 +84,7 @@ struct foreach {
         ::f(std::forward<Args>(args)...);
 
     std::cout << "Just testing syntax highlighting\n";
-    const char c = 'c';
+    char const c = 'c';
     std::vector<int> v{3};  // what is the length of this?
   }
 };
@@ -108,6 +109,7 @@ class cat:
   \end{lstlisting}
 \end{frame}
 
+\subsection{Blocks}
 \begin{frame}\frametitle{Blocks}
   Quite nice but maybe boxes based on \texttt{tcolorbox} are better? See below.
   \begin{block}{A normal block}
@@ -174,7 +176,7 @@ class cat:
   Some more text with a \tikzmark{t1}ref in the middle.
   % draw an arrow from n1 to t1
   \begin{tikzpicture}[remember picture, overlay]
-    \draw[->] ([yshift=0.5ex]pic cs:n1) to[bend right] ([yshift=0.5ex]pic cs:t1);
+    \draw[->, >=left to, line width=1mm, color=aiphibordeaux] ([yshift=0.5ex]pic cs:n1) to[bend right] ([yshift=0.5ex]pic cs:t1);
   \end{tikzpicture}
 
   \vspace{3ex}
@@ -189,6 +191,7 @@ class cat:
 
   % draw lines and circles
   % all with manual adjustment of positions
+  % manually place nodes to have control over the bullet size
   \begin{tikzpicture}[remember picture, overlay]
     \draw let
       \p1 = ([xshift=3pt, yshift=-3pt]pic cs:spin1),
