@@ -123,7 +123,7 @@
   boxrule=0.4pt,
   top=0mm, bottom=0mm, right=1.5pt, left=0mm,  % most margins controlled through title box
   arc=0pt,
-  boxsep=-0.1pt,  % negative to remove gap between title colorbox and rule
+  boxsep=-0.35pt,  % negative to remove gap between title colorbox and rule
   before upper={\vphantom{dlg}},
   colframe=aiphigreen!80!white,
   coltext=aiphigreen!90!white,
@@ -131,7 +131,7 @@
   fontupper=\scriptsize\ttfamily,
   fonttitle=\scriptsize\ttfamily,
   attach title to upper,  % show title at left instead of above
-  title={\setlength{\fboxsep}{1.5pt}\colorbox{aiphigreen!90!white}{#1}},  % extra box to give background to title
+  title={\setlength{\fboxsep}{1.7pt}\colorbox{aiphigreen!90!white}{#1}},  % extra box to give background to title
 }
 
 % a color box inside a textblock to allow for arbitrary positioning
@@ -233,7 +233,9 @@
 
 % cite things inline using an icitebox
 \newcommand{\icite}[2]{\begin{icitebox}{#1}#2\end{icitebox}}
-\newcommand{\arxiv}[1]{\icite{arXiv}{#1}}
+\newcommand{\arxiv}[1]{\icite{arXiv}{\href{https://arxiv.org/abs/#1}{#1}}}
+\newcommand{\doi}[1]{\icite{doi}{\href{https://doi.org/#1}{#1}}}
+
 
 %%% Local Variables:
 %%% mode: latex
