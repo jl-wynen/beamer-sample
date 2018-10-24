@@ -1,7 +1,7 @@
 % basic text processing/formatting
 \usepackage{ucs}                % more unicode
 \usepackage[utf8x]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
 \usepackage[english]{babel}
 
 % maths stuff
@@ -28,7 +28,7 @@
 
 %% devel only
 % overlay a grid over the slides
-\usepackage[texcoord,grid,gridcolor=black!10,subgridcolor=black!5,gridunit=mm]{eso-pic}
+% \usepackage[texcoord,grid,gridcolor=black!10,subgridcolor=black!5,gridunit=mm]{eso-pic}
 \usepackage{lipsum}
 
 
@@ -170,6 +170,15 @@
   morestring=[b]'
 }
 
+% Very simple language to highlight interactive shell commands, not scripts.
+\lstdefinelanguage{aiphishell}{
+  morekeywords={},
+  morecomment=[l]{\#},
+  morecomment=[s]{<}{>},
+  morestring=[b]",
+  morestring=[b]'
+}
+
 % custom style for code listings
 \lstdefinestyle{aiphilst}{
   language=aiphicpp,  % the default language
@@ -235,8 +244,9 @@
 \newcommand{\arxiv}[1]{\icite{arXiv}{\href{https://arxiv.org/abs/#1}{#1}}}
 \newcommand{\doi}[1]{\icite{doi}{\href{https://doi.org/#1}{#1}}}
 
-
 %%% Local Variables:
+%%% coding: utf-8
 %%% mode: latex
+%%% TeX-engine: xetex
 %%% TeX-master: "main"
 %%% End:
