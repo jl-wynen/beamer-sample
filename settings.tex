@@ -22,6 +22,7 @@
 \usepackage{placeins}           % FloatBarrier
 \usepackage{listings}           % source code listings
 \usepackage{lmodern}            % to scale font to whatever I want
+\usepackage{verbatim}           % print input as it is
 \usepackage[xparse, skins]{tcolorbox}   % nice coloured boxes
 % for textblock, remove showboxes for release
 \usepackage[absolute,overlay,showboxes]{textpos}
@@ -60,6 +61,10 @@
 %----------------------------------------------------------
 % setup fonts
 \newfontfamily\dvfamily{DejaVu Sans Mono}
+
+\makeatletter
+\def\verbatim@font{\dvfamily}
+\makeatother
 
 
 %----------------------------------------------------------
