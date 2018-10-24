@@ -92,10 +92,9 @@ struct foreach {
 \end{frame}
 
 % fragile again (see above)
-\begin{frame}[fragile]\frametitle{\texttt{Python} code}
-  % set language of next listing
-  \lstset{language=python}
-  \begin{lstlisting}[caption={Some Python as well}]
+\begin{frame}[fragile]\frametitle{{\dvfamily Python} code}
+  % set language of listings in this frame
+  \begin{lstlisting}[language=python, caption={Some Python as well}]
 # a hat in a cat
 class cat:
   """A cat shaped like an arbitrary hat"""
@@ -107,6 +106,25 @@ class cat:
     # watch out for auto line breaks:
     print(f"A {self._shape} shaped hat in a now {self._shape} shaped cat")
   \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Shell commands}
+  % set style of listings in this frame
+  % \lstset{style=aiphishell}
+  \begin{itemize}
+  \item First thing:
+    % select shell language and style manually
+    \begin{lstlisting}[language=aiphishell, style=aiphishell]
+mkdir <your-dir>
+cd <your-dir>
+    \end{lstlisting}
+  \item Then:
+    % set language and style 'automatically'
+    \begin{aiphishell}
+git add <a-file>
+git commit -m'Super meaningful message'  # the message is important!
+    \end{aiphishell}
+  \end{itemize}
 \end{frame}
 
 \subsection{Blocks}

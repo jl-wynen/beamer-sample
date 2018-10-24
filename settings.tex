@@ -58,6 +58,11 @@
 
 
 %----------------------------------------------------------
+% setup fonts
+\newfontfamily\dvfamily{DejaVu Sans Mono}
+
+
+%----------------------------------------------------------
 % tcolorbox
 % box for itemizes
 \NewTColorBox{itembox}{m}{
@@ -182,11 +187,13 @@
 % custom style for code listings
 \lstdefinestyle{aiphilst}{
   language=aiphicpp,  % the default language
-  basicstyle=\scriptsize\ttfamily\color[RGB]{211,211,211},  % default font size
+  basicstyle=\scriptsize\dvfamily,  % default font size
   breakatwhitespace=false,  % if true, lines are only broken at whitespaces
   breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphired}{\rotatebox[origin=c]{180}{$\Lsh$}}},
   showstringspaces=false,  % show marker at spaces in strings
-  captionpos=b, % place captions below listin
+  captionpos=b, % place captions below listing
 %
   frame=l,                                  % frame around code, show only to the left
   framerule=1.5pt,                          % frame width
@@ -196,14 +203,63 @@
   numbersep=6pt, % distance of line numbers from code
   numberstyle=\tiny\color{black},  % text style of line numbers
 %
-  backgroundcolor=\color[HTML]{282b2e},
-  commentstyle=\itshape\color[HTML]{8cbbad},
+  commentstyle=\itshape\color{aiphipetrol},
   keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
-  keywordstyle={[2]\color{aiphigreen!75!white}},
-  stringstyle=\color{aiphired!70!white},
+  keywordstyle={[2]\color{aiphigreen}},
+  stringstyle=\color{aiphired!90!black},
 }
 % set this style as default
 \lstset{style=aiphilst}
+
+\lstdefinestyle{aiphishell}{
+  language=aiphishell,  % the default language
+  basicstyle=\scriptsize\dvfamily,  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphiblue}{\rotatebox[origin=c]{180}{$\Lsh$}}},
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listing
+%
+  frame=l,  % frame around code, show only to the left
+  framerule=1.5pt,  % frame width
+  rulecolor=\color{aiphiblue!75!white}, % colour of frame
+%
+  numbers=none,  % no line numbers here
+%
+  commentstyle=\itshape\color{aiphipetrol},
+  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
+  keywordstyle={[2]\color{aiphigreen}},
+  stringstyle=\color{aiphired!90!black},
+}
+
+% show a prompt in shell session listings
+\makeatletter
+
+% store language for shells as command so we can use it for comparison below
+\newcommand\langname@aiphishell{}
+\def\langname@aiphishell{aiphishell}
+
+% define shell prompt
+\newcommand\prompt@aiphishell{{\color{aiphiblue}\$}\ }
+
+% add this to the beginning of every line (empty at first)
+\newcommand\addedToEveryPar@aiphishell{}
+\lst@AddToHook{EveryPar}{\addedToEveryPar@aiphishell}
+
+% show the prompt if language is aiphishell
+\lst@AddToHook{PreInit}{%
+  \ifx\lst@language\langname@aiphishell%
+    \let\addedToEveryPar@aiphishell\prompt@aiphishell%
+  \fi
+}
+
+\makeatother
+
+% environment to help with shell session listings
+\lstnewenvironment{aiphishell}[1][]
+{\lstset{language=aiphishell, style=aiphishell}}
+{\lstset{language=aiphicpp, style=aiphilst}}
 
 
 % ----------------------------------------------------------
