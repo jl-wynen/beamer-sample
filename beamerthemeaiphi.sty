@@ -8,6 +8,11 @@
 \@themeaiphi@tocfalse
 \DeclareOption{toc}{\@themeaiphi@toctrue}
 
+% option to use rainbow coloured progressbar
+\newif\if@themeaiphi@rainbow
+\@themeaiphi@rainbowfalse
+\DeclareOption{rainbow}{\@themeaiphi@rainbowtrue}
+
 \ProcessOptions{}
 
 \mode<presentation>
@@ -16,9 +21,17 @@
 \usecolortheme{aiphi}
 \useinnertheme{aiphi}
 \if@themeaiphi@titleinfoot
-  \useoutertheme[titleinfoot]{aiphi}
+  \if@themeaiphi@rainbow
+    \useoutertheme[titleinfoot, rainbow]{aiphi}
+  \else
+    \useoutertheme[titleinfoot]{aiphi}
+  \fi
 \else
-  \useoutertheme{aiphi}
+  \if@themeaiphi@rainbow
+    \useoutertheme[rainbow]{aiphi}
+  \else
+    \useoutertheme{aiphi}
+  \fi
 \fi
 
 % enable toc before every section if option is set

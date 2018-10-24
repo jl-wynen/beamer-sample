@@ -3,6 +3,11 @@
 \@themeaiphi@titleinfootfalse
 \DeclareOption{titleinfoot}{\@themeaiphi@titleinfoottrue}
 
+% option to use rainbow coloured progressbar
+\newif\if@themeaiphi@rainbow
+\@themeaiphi@rainbowfalse
+\DeclareOption{rainbow}{\@themeaiphi@rainbowtrue}
+
 \ProcessOptions
 
 \mode<presentation>
@@ -58,21 +63,57 @@
 
 % add a progress bar over footline
 \newlength{\aiphi@progressinheadfoot}
-\setbeamertemplate{progress bar in head/foot}{
-  \nointerlineskip{}
-  \setlength{\aiphi@progressinheadfoot}{%
-    \paperwidth*\ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
-  }%
-  \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
-    \begin{tikzpicture}
-      \draw[bg, fill=bg] (0,0) rectangle (\paperwidth, 0.2em);
-      \draw[fg, fill=fg] (0,0) rectangle (\aiphi@progressinheadfoot, 0.2em);
-    \end{tikzpicture}%
-  \end{beamercolorbox}
-}
+
+\if@themeaiphi@rainbow
+  % rainbow coloured
+  \setbeamertemplate{progress bar in head/foot}{
+    \nointerlineskip{}
+    \setlength{\aiphi@progressinheadfoot}{%
+      \paperwidth*\ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+    }%
+    \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+      \begin{tikzpicture}
+        \fill[shade, left color=aiphired, right color=aiphiyellow] (0,0) rectangle (.25\paperwidth, 0.3em);
+        \fill[shade, left color=aiphiyellow, right color=aiphigreen] (.25\paperwidth,0) rectangle (.5\paperwidth, 0.3em);
+        \fill[shade, left color=aiphigreen, right color=aiphiblue!90!white] (.5\paperwidth,0) rectangle (.75\paperwidth, 0.3em);
+        \fill[shade, left color=aiphiblue!90!white, right color=aiphiviolet!90!white] (.75\paperwidth,0) rectangle (\paperwidth, 0.3em);
+
+        \fill[fill=bg] (\aiphi@progressinheadfoot,0) rectangle (\paperwidth, 0.3em);
+      \end{tikzpicture}%
+    \end{beamercolorbox}
+  }
+\else
+  % single colour
+  \setbeamertemplate{progress bar in head/foot}{
+    \nointerlineskip{}
+    \setlength{\aiphi@progressinheadfoot}{%
+      \paperwidth*\ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+    }%
+    \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+      \begin{tikzpicture}
+        \draw[bg, fill=bg] (0,0) rectangle (\paperwidth, 0.2em);
+        \draw[fg, fill=fg] (0,0) rectangle (\aiphi@progressinheadfoot, 0.2em);
+      \end{tikzpicture}%
+    \end{beamercolorbox}
+  }
+\fi
+
 \addtobeamertemplate{footline}{\usebeamertemplate*{progress bar in head/foot}}{}
 
 % remove the right sidebar -> removes logo from all frames but title page
 \setbeamertemplate{sidebar right}{}
 
 \mode<all>
+
+% \definecolor{aiphired}      {RGB}{204,7,30}
+% \definecolor{aiphiyellow}   {RGB}{255,237,0}
+% \definecolor{aiphigreen}    {RGB}{87,171,39}
+% \definecolor{aiphiblue}     {RGB}{0,84,159}
+% \definecolor{aiphiviolet}   {RGB}{97,33,88}
+
+
+
+% \definecolor{aiphibordeaux} {RGB}{161,16,53}
+% \definecolor{aiphipetrol}   {RGB}{0,97,101}
+
+

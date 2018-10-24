@@ -13,7 +13,7 @@
   \setbeamertemplate{itemize item}{}
   \setbeamertemplate{itemize subitem}{\adfrightarrowhead}
   \setbeamertemplate{itemize subsubitem}{--}
-  
+
   \begin{itemize}\setlength{\itemsep}{1.5ex}
   \item \textbf{Motivation}
     \begin{itemize}\setlength{\itemsep}{1ex}
@@ -219,7 +219,7 @@ class cat:
 {
   % show tiny text in background
   % use \clip to fit the bounding box tightly to the tikz node
-  \usebackgroundtemplate{\begin{tikzpicture}[spy using outlines]
+  \usebackgroundtemplate{\begin{tikzpicture}
       \clip (-.5\paperwidth,-.5\paperheight) rectangle (.5\paperwidth,.5\paperheight);
       \node[text width=\paperwidth, color=gray, font=\fontsize{1}{0}\selectfont] {
         \input{noise}
