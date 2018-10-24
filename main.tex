@@ -216,42 +216,43 @@ class cat:
   \end{tikzpicture}
 \end{frame}
 
-{
-  % show tiny text in background
-  % use \clip to fit the bounding box tightly to the tikz node
-  \usebackgroundtemplate{\begin{tikzpicture}
-      \clip (-.5\paperwidth,-.5\paperheight) rectangle (.5\paperwidth,.5\paperheight);
-      \node[text width=\paperwidth, color=gray, font=\fontsize{1}{0}\selectfont] {
-        \input{noise}
-      };
-    \end{tikzpicture}}
-  \begin{frame}\frametitle{Noise}
-    \begin{itemize}
-    \item Some background noise
-    \item Is it really just noise?\ldots
-    \end{itemize}
-  \end{frame}
-}
+% This is super slow with XeTeX!
+% {
+%   % show tiny text in background
+%   % use \clip to fit the bounding box tightly to the tikz node
+%   \usebackgroundtemplate{\begin{tikzpicture}
+%       \clip (-.5\paperwidth,-.5\paperheight) rectangle (.5\paperwidth,.5\paperheight);
+%       \node[text width=\paperwidth, color=gray, font=\fontsize{1}{0}\selectfont] {
+%         \input{noise}
+%       };
+%     \end{tikzpicture}}
+%   \begin{frame}\frametitle{Noise}
+%     \begin{itemize}
+%     \item Some background noise
+%     \item Is it really just noise?\ldots
+%     \end{itemize}
+%   \end{frame}
+% }
 
-% dirty trick to have the same slide number for both
-\addtocounter{framenumber}{-1}
-{
-  % show a magnified part of formula
-  \usebackgroundtemplate{\begin{tikzpicture}[spy using outlines]
-      \clip (-.5\paperwidth,-.5\paperheight) rectangle (.5\paperwidth,.5\paperheight);
-      \node[text width=\paperwidth, color=gray, font=\fontsize{1}{0}\selectfont] {
-        \input{noise}
-      };
-      \spy[black, circle, draw, size=5cm, magnification=6, connect spies] on (0,0) in node [fill=white] at (3.5,1.5);
-    \end{tikzpicture}}
-  % a copy of the above slide
-  \begin{frame}\frametitle{Noise}
-    \begin{itemize}
-    \item Some background noise
-    \item Is it really just noise?\ldots
-    \end{itemize}
-  \end{frame}
-}
+% % dirty trick to have the same slide number for both
+% \addtocounter{framenumber}{-1}
+% {
+%   % show a magnified part of formula
+%   \usebackgroundtemplate{\begin{tikzpicture}[spy using outlines]
+%       \clip (-.5\paperwidth,-.5\paperheight) rectangle (.5\paperwidth,.5\paperheight);
+%       \node[text width=\paperwidth, color=gray, font=\fontsize{1}{0}\selectfont] {
+%         \input{noise}
+%       };
+%       \spy[black, circle, draw, size=5cm, magnification=6, connect spies] on (0,0) in node [fill=white] at (3.5,1.5);
+%     \end{tikzpicture}}
+%   % a copy of the above slide
+%   \begin{frame}\frametitle{Noise}
+%     \begin{itemize}
+%     \item Some background noise
+%     \item Is it really just noise?\ldots
+%     \end{itemize}
+%   \end{frame}
+% }
 
 \begin{frame}[plain,c]
   % suppress strange item marker in center
