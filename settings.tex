@@ -178,15 +178,6 @@
   morestring=[b]'
 }
 
-% Very simple language to highlight interactive shell commands, not scripts.
-\lstdefinelanguage{aiphishell}{
-  morekeywords={},
-  morecomment=[l]{\#},
-  morecomment=[s]{<}{>},
-  morestring=[b]",
-  morestring=[b]'
-}
-
 % custom style for code listings
 \lstdefinestyle{aiphilst}{
   language=aiphicpp,  % the default language
@@ -213,6 +204,47 @@
 }
 % set this style as default
 \lstset{style=aiphilst}
+
+
+% Language that doesn't highlight anything.
+\lstdefinelanguage{aiphinull}{}
+
+% custom style for code listings
+\lstdefinestyle{aiphifile}{
+  language=aiphinull,  % the default language
+  basicstyle=\scriptsize\dvfamily\color{black!70!white},  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphired}{\rotatebox[origin=c]{180}{$\Lsh$}}},
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listing
+%
+  frame=l,                                  % frame around code, show only to the left
+  framerule=1.5pt,                          % frame width
+  rulecolor=\color{black!80!white}, % colour of frame
+%
+  numbers=left,  % line numbers, one of none, left, right
+  numbersep=6pt, % distance of line numbers from code
+  numberstyle=\tiny\color{black},  % text style of line numbers
+  backgroundcolor=\color{black!5!white}
+}
+
+
+% environment for file listings
+\lstnewenvironment{aiphifile}[1][]
+{\lstset{style=aiphifile}}
+{\lstset{style=aiphifile}}
+
+
+% Very simple language to highlight interactive shell commands, not scripts.
+\lstdefinelanguage{aiphishell}{
+  morekeywords={},
+  morecomment=[l]{\#},
+  morecomment=[s]{<}{>},
+  morestring=[b]",
+  morestring=[b]'
+}
 
 \lstdefinestyle{aiphishell}{
   language=aiphishell,  % the default language
