@@ -146,8 +146,8 @@ Law of Continuity:
     anchor=west,
     calign=first,
     edge path={
-      \noexpand\path [draw, \forestoption{edge}, black!70!white]
-      ([xshift=7.5pt]!u.south west) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+      \noexpand\path [draw, \forestoption{edge}, black!60!white, line width=.3mm]
+      ([xshift=7.5pt]!u.south west) |- node[fill,inner sep=.5mm] {} (.child anchor)\forestoption{edge label};
     },
     before typesetting nodes={
       if n=1
@@ -171,7 +171,7 @@ Law of Continuity:
         [trajPoint \textnormal{\color{black!60!white}[integer]}]
       ]
       [\ldots, edge path={
-        \noexpand\path [draw, \forestoption{edge}, dashed, black]
+        \noexpand\path [draw, \forestoption{edge}, dashed, black!60!white, line width=.3mm]
         ([xshift=7.5pt]!u.south west) |- ([xshift=-7.5pt].child anchor)\forestoption{edge label};
       }]
     ]
