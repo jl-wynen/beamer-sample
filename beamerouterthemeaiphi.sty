@@ -73,11 +73,14 @@
     }%
     \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
       \begin{tikzpicture}
+        % a violet that is better suited than aiphiviolet
+        \definecolor{tempviolet}{RGB}{140,42,126}
+
         \fill[shade, left color=aiphired, right color=aiphiyellow] (0,0) rectangle (.25\paperwidth, 0.3em);
         \fill[shade, left color=aiphiyellow, right color=aiphigreen] (.25\paperwidth,0) rectangle (.5\paperwidth, 0.3em);
         \fill[shade, left color=aiphigreen, right color=aiphiblue!90!white] (.5\paperwidth,0) rectangle (.75\paperwidth, 0.3em);
-        \fill[shade, left color=aiphiblue!90!white, right color=aiphiviolet!90!white] (.75\paperwidth,0) rectangle (\paperwidth, 0.3em);
-
+        \fill[shade, left color=aiphiblue!90!white, right color=tempviolet] (.75\paperwidth,0) rectangle (\paperwidth, 0.3em);
+%aiphiviolet!90!white
         \fill[fill=bg] (\aiphi@progressinheadfoot,0) rectangle (\paperwidth, 0.3em);
       \end{tikzpicture}%
     \end{beamercolorbox}
