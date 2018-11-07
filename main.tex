@@ -108,6 +108,23 @@ class cat:
   \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]\frametitle{Pseudocode}
+  \begin{aiphipseudo}[emph={isingmc}, caption={Some MC pseudocode}]
+isingmc (cfg) -> E, m:
+    (*\color{aiphigreen}E $\leftarrow$ hamiltonian(E)*)
+
+    repeat ntherm:
+        cfg(*\color{aiphigreen}, E*) <- sweep(cfg(*\color{aiphigreen}, E*))
+
+    repeat nprod:
+        cfg(*\color{aiphigreen}, E*) <- sweep(cfg(*\color{aiphigreen}, E*))
+        (*\color{aiphired}E $\leftarrow$ hamiltonian(cfg)*)
+        m <- magnetisation(cfg)
+
+        // do something with E, m
+  \end{aiphipseudo}
+\end{frame}
+
 \begin{frame}[fragile]\frametitle{Shell commands and files}
   % set style of listings in this frame
   % \lstset{style=aiphishell}
