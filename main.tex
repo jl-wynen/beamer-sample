@@ -67,8 +67,7 @@
 \subsection{First Sub}
 % we need fragile so the code listing can position itself properly
 \begin{frame}[fragile]\frametitle{Code!}
-  % language is C++ by default
-  \begin{lstlisting}[caption={A test C++ listing}]
+  \begin{cppcode}[caption={A test C++ listing}]
 // Some nice semi-meta function
 template <typename It,
           template <typename...> class F,
@@ -88,13 +87,13 @@ struct foreach {
     std::vector<int> v{3};  // what is the length of this?
   }
 };
-  \end{lstlisting}
+  \end{cppcode}
 \end{frame}
 
 % fragile again (see above)
 \begin{frame}[fragile]\frametitle{{\dvfamily Python} code}
   % set language of listings in this frame
-  \begin{lstlisting}[language=python, caption={Some Python as well}]
+  \begin{pycode}[caption={Some Python as well}]
 # a hat in a cat
 class cat:
   """A cat shaped like an arbitrary hat"""
@@ -105,7 +104,7 @@ class cat:
   def show(self):
     # watch out for auto line breaks:
     print(f"A {self._shape} shaped hat in a now {self._shape} shaped cat")
-  \end{lstlisting}
+  \end{pycode}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Pseudocode}
@@ -130,26 +129,23 @@ isingmc (cfg) -> E, m:
   % \lstset{style=aiphishell}
   \begin{itemize}
   \item First thing:
-    % select shell language and style manually
-    \begin{lstlisting}[language=aiphishell, style=aiphishell]
+    \begin{shell}[]
 mkdir <your-dir>
 cd <your-dir>
-    \end{lstlisting}
+    \end{shell}
   \item Then:
-    % set language and style 'automatically'
-    \begin{aiphishell}
+    \begin{shell}[]
 git add <a-file>
 git commit -m'Super meaningful message'  # the message is important!
-    \end{aiphishell}
+    \end{shell}
   \item Files:
-    \begin{aiphishell}
+    \begin{shell}[]
 cat wisdom.txt
-    \end{aiphishell}
-    \begin{aiphifile}
+    \end{shell}
+    \begin{file}[]
 Law of Continuity:
     Experiments should be reproducible.  They should all fail the same way.
-    \end{aiphifile}
-
+    \end{file}
   \end{itemize}
 \end{frame}
 

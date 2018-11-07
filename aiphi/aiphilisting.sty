@@ -5,6 +5,8 @@
 % using the listings package.
 %
 % In addition, new environments are defined to help using those styles.
+% All of those custom listing environments take keyword arguments and pass them
+% along to lstlistings. But empty [] must be given if no optional args are used!
 %
 
 \NeedsTeXFormat{LaTeX2e}
@@ -12,25 +14,13 @@
 
 \RequirePackage{listings}
 
-% all custom listing environments take keyword args and pass them along to lstlistings
-% but empty [] must be given if no optional args are used!
 
-
-
-% Define a new language for C++ to have proper detection of built in datatypes.
-% I hope I got all keywords.
-\lstdefinelanguage{aiphicpp}{
-  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline, and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final},
-  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
-  morecomment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]",
-  morestring=[b]'
-}
+% ---------------------------------------------------------------------------------------
+% Default
+% ---------------------------------------------------------------------------------------
 
 % custom style for code listings
 \lstdefinestyle{aiphilst}{
-  language=aiphicpp,  % the default language
   basicstyle=\scriptsize\dvfamily,  % default font size
   breakatwhitespace=false,  % if true, lines are only broken at whitespaces
   breaklines=true,
@@ -39,23 +29,60 @@
   showstringspaces=false,  % show marker at spaces in strings
   captionpos=b, % place captions below listing
 %
-  frame=l,                                  % frame around code, show only to the left
-  framerule=1.5pt,                          % frame width
-  rulecolor=\color{aiphibordeaux!75!white}, % colour of frame
+  frame=l,  % frame around code, show only to the left
+  framerule=1.5pt,  % frame width
+  rulecolor=\color{black!75!white},  % colour of frame
 %
   numbers=left,  % line numbers, one of none, left, right
   numbersep=6pt, % distance of line numbers from code
   numberstyle=\tiny\color{black},  % text style of line numbers
 %
-  commentstyle=\itshape\color{aiphipetrol},
+  commentstyle=\itshape\color{black!60!white},
   keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
   keywordstyle={[2]\color{aiphigreen}},
   stringstyle=\color{aiphired!90!black},
 }
 % set this style as default
 \lstset{style=aiphilst}
+
 % escape all code in (*  *) pairs
 \lstset{escapeinside={(*}{*)}}
+
+
+% ---------------------------------------------------------------------------------------
+% C++
+% ---------------------------------------------------------------------------------------
+
+% Define a new language for C++ to have proper detection of built in datatypes.
+% I hope I got all keywords.
+\lstdefinelanguage{aiphicpp}{
+  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline, and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final, alignof, __attribute__},
+  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+% environment for C++ code
+\lstnewenvironment{cppcode}[1][1]
+{\lstset{language=aiphicpp, style=aiphilst, #1}}
+{}
+
+
+% ---------------------------------------------------------------------------------------
+% Python
+% ---------------------------------------------------------------------------------------
+
+% environment for Python code
+\lstnewenvironment{pycode}[1][1]
+{\lstset{language=python, style=aiphilst, #1}}
+{}
+
+
+% ---------------------------------------------------------------------------------------
+% Files
+% ---------------------------------------------------------------------------------------
 
 % Language that doesn't highlight anything.
 \lstdefinelanguage{aiphinull}{}
@@ -78,15 +105,19 @@
   numbers=left,  % line numbers, one of none, left, right
   numbersep=6pt, % distance of line numbers from code
   numberstyle=\tiny\color{black},  % text style of line numbers
+%
   backgroundcolor=\color{black!5!white}
 }
 
-% TODO ending code?
 % environment for file listings
-\lstnewenvironment{aiphifile}[1][]
-{\lstset{style=aiphifile}}
-{\lstset{style=aiphifile}}
+\lstnewenvironment{file}[1][1]
+{\lstset{language=aiphinull, style=aiphifile, #1}}
+{}
 
+
+% ---------------------------------------------------------------------------------------
+% Pseudocode
+% ---------------------------------------------------------------------------------------
 
 \lstdefinelanguage{aiphipseudo}{
   morekeywords={repeat, if, else, for, white, unless, not, and, or},
@@ -121,12 +152,15 @@
   literate=*{<-}{$\leftarrow$}{2} {->}{$\rightarrow$}{2},
 }
 
-% TODO ending code?
 % environment for pseudocode
 \lstnewenvironment{aiphipseudo}[1][1]
 {\lstset{style=aiphipseudo, #1}}
-{\lstset{style=aiphilst}}
+{}
 
+
+% ---------------------------------------------------------------------------------------
+% Shell sessions
+% ---------------------------------------------------------------------------------------
 
 % Very simple language to highlight interactive shell commands, not scripts.
 \lstdefinelanguage{aiphishell}{
@@ -149,7 +183,7 @@
 %
   frame=l,  % frame around code, show only to the left
   framerule=1.5pt,  % frame width
-  rulecolor=\color{aiphiblue!75!white}, % colour of frame
+  rulecolor=\color{aiphiblue!80!black}, % colour of frame
 %
   numbers=none,  % no line numbers here
 %
@@ -183,8 +217,8 @@
 \makeatother
 
 % environment to help with shell session listings
-\lstnewenvironment{aiphishell}[1][]
-{\lstset{language=aiphishell, style=aiphishell}}
-{\lstset{language=aiphicpp, style=aiphilst}}
+\lstnewenvironment{shell}[1][1]
+{\lstset{language=aiphishell, style=aiphishell, #1}}
+{\lstset{language=aiphicpp, style=aiphilst, #1}}
 
 \endinput
