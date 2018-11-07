@@ -1,0 +1,190 @@
+%
+% Package aiphilisting -- Subpackage of aiphi
+%
+% This package defines defines languages and styles for code listings
+% using the listings package.
+%
+% In addition, new environments are defined to help using those styles.
+%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{aiphiboxes}
+
+\RequirePackage{listings}
+
+% all custom listing environments take keyword args and pass them along to lstlistings
+% but empty [] must be given if no optional args are used!
+
+
+
+% Define a new language for C++ to have proper detection of built in datatypes.
+% I hope I got all keywords.
+\lstdefinelanguage{aiphicpp}{
+  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline, and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final},
+  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+% custom style for code listings
+\lstdefinestyle{aiphilst}{
+  language=aiphicpp,  % the default language
+  basicstyle=\scriptsize\dvfamily,  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphired}{\rotatebox[origin=c]{180}{$\Lsh$}}},
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listing
+%
+  frame=l,                                  % frame around code, show only to the left
+  framerule=1.5pt,                          % frame width
+  rulecolor=\color{aiphibordeaux!75!white}, % colour of frame
+%
+  numbers=left,  % line numbers, one of none, left, right
+  numbersep=6pt, % distance of line numbers from code
+  numberstyle=\tiny\color{black},  % text style of line numbers
+%
+  commentstyle=\itshape\color{aiphipetrol},
+  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
+  keywordstyle={[2]\color{aiphigreen}},
+  stringstyle=\color{aiphired!90!black},
+}
+% set this style as default
+\lstset{style=aiphilst}
+% escape all code in (*  *) pairs
+\lstset{escapeinside={(*}{*)}}
+
+% Language that doesn't highlight anything.
+\lstdefinelanguage{aiphinull}{}
+
+% custom style for code listings
+\lstdefinestyle{aiphifile}{
+  language=aiphinull,  % the default language
+  basicstyle=\scriptsize\dvfamily\color{black!70!white},  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphired}{\rotatebox[origin=c]{180}{$\Lsh$}}},
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listing
+%
+  frame=l,                                  % frame around code, show only to the left
+  framerule=1.5pt,                          % frame width
+  rulecolor=\color{black!80!white}, % colour of frame
+%
+  numbers=left,  % line numbers, one of none, left, right
+  numbersep=6pt, % distance of line numbers from code
+  numberstyle=\tiny\color{black},  % text style of line numbers
+  backgroundcolor=\color{black!5!white}
+}
+
+% TODO ending code?
+% environment for file listings
+\lstnewenvironment{aiphifile}[1][]
+{\lstset{style=aiphifile}}
+{\lstset{style=aiphifile}}
+
+
+\lstdefinelanguage{aiphipseudo}{
+  morekeywords={repeat, if, else, for, white, unless, not, and, or},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+\lstdefinestyle{aiphipseudo}{
+  language=aiphipseudo,  % the default language
+  basicstyle=\scriptsize\dvfamily,  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphiblue}{\rotatebox[origin=c]{180}{$\Lsh$}}},
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listing
+%
+  frame=l,                                  % frame around code, show only to the left
+  framerule=1.5pt,                          % frame width
+  rulecolor=\color{black!75!white}, % colour of frame
+%
+  numbers=left,  % line numbers, one of none, left, right
+  numbersep=6pt, % distance of line numbers from code
+  numberstyle=\tiny\color{black},  % text style of line numbers
+%
+  commentstyle=\itshape\color{black!60!white},
+  keywordstyle={[1]\bfseries},
+  stringstyle=\color{aiphired!90!black},
+  emphstyle=\underbar,
+  literate=*{<-}{$\leftarrow$}{2} {->}{$\rightarrow$}{2},
+}
+
+% TODO ending code?
+% environment for pseudocode
+\lstnewenvironment{aiphipseudo}[1][1]
+{\lstset{style=aiphipseudo, #1}}
+{\lstset{style=aiphilst}}
+
+
+% Very simple language to highlight interactive shell commands, not scripts.
+\lstdefinelanguage{aiphishell}{
+  morekeywords={},
+  morecomment=[l]{\#},
+  morecomment=[s]{<}{>},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinestyle{aiphishell}{
+  language=aiphishell,  % the default language
+  basicstyle=\scriptsize\dvfamily,  % default font size
+  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
+  breaklines=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{aiphiblue}{\rotatebox[origin=c]{180}{$\Lsh$}}},
+  showstringspaces=false,  % show marker at spaces in strings
+  captionpos=b, % place captions below listing
+%
+  frame=l,  % frame around code, show only to the left
+  framerule=1.5pt,  % frame width
+  rulecolor=\color{aiphiblue!75!white}, % colour of frame
+%
+  numbers=none,  % no line numbers here
+%
+  commentstyle=\itshape\color{aiphipetrol},
+  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
+  keywordstyle={[2]\color{aiphigreen}},
+  stringstyle=\color{aiphired!90!black},
+}
+
+% show a prompt in shell session listings
+\makeatletter
+
+% store language for shells as command so we can use it for comparison below
+\newcommand\langname@aiphishell{}
+\def\langname@aiphishell{aiphishell}
+
+% define shell prompt
+\newcommand\prompt@aiphishell{{\color{aiphiblue}\$}\ }
+
+% add this to the beginning of every line (empty at first)
+\newcommand\addedToEveryPar@aiphishell{}
+\lst@AddToHook{EveryPar}{\addedToEveryPar@aiphishell}
+
+% show the prompt if language is aiphishell
+\lst@AddToHook{PreInit}{%
+  \ifx\lst@language\langname@aiphishell%
+    \let\addedToEveryPar@aiphishell\prompt@aiphishell%
+  \fi
+}
+
+\makeatother
+
+% environment to help with shell session listings
+\lstnewenvironment{aiphishell}[1][]
+{\lstset{language=aiphishell, style=aiphishell}}
+{\lstset{language=aiphicpp, style=aiphilst}}
+
+\endinput

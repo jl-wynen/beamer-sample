@@ -19,12 +19,15 @@
 \usepackage{float}              % place graphics with "H"
 \usepackage{braket}             % Dirac notation
 \usepackage{placeins}           % FloatBarrier
-\usepackage{listings}           % source code listings
 \usepackage{lmodern}            % to scale font to whatever I want
 \usepackage{verbatim}           % print input as it is
-\usepackage[xparse, skins]{tcolorbox}   % nice coloured boxes
-% for textblock, remove showboxes for release
+
+% For textblock, remove showboxes for release.
+% Gets loaded by aiphi, but this way we can specify showboxes.
 \usepackage[absolute,overlay,showboxes]{textpos}
+
+% load customisations
+\usepackage{aiphi}
 
 %% devel only
 % overlay a grid over the slides
@@ -32,10 +35,9 @@
 \usepackage{lipsum}
 
 
-%----------------------------------------------------------
+% ---------------------------------------------------------------------------------------
 % general info
-% ISO date format
-\newdateformat{isodate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+% ---------------------------------------------------------------------------------------
 
 % commands so we can refer to these later
 \newcommand{\theauthor}{Jan-Lukas Wynen}
@@ -52,335 +54,29 @@
 \logo{\thelogo}
 
 
-%----------------------------------------------------------
+% ---------------------------------------------------------------------------------------
 % setup beamer
+% ---------------------------------------------------------------------------------------
 \usetheme[titleinfoot, toc, rainbow]{aiphi}
 
 
-%----------------------------------------------------------
-% setup fonts
-\newfontfamily\dvfamily{DejaVu Sans Mono}
-\newcommand{\textdv}[1]{{\dvfamily{}#1}}
-
-\makeatletter
-\def\verbatim@font{\dvfamily}
-\makeatother
-
-
-%----------------------------------------------------------
-% tcolorbox
-% box for itemizes
-\NewTColorBox{itembox}{m}{
-  title=#1,
-  noparskip,  % not using library parskip
-  left=1mm, right=3mm, bottom=3mm, top=3mm,  % less for left to account for itemize
-  sharp corners,
-  boxrule=0.5mm,
-  colframe=aiphiblue,
-  colback=white
-}
-
-% box with a fancy title
-\NewTColorBox{fancybox}{m}{
-  enhanced,
-  title=#1,
-  attach boxed title to top center={
-    yshift=-0.25mm-\tcboxedtitleheight/2,  % extra shift is 1/2 boxrule
-    yshifttext=1ex-\tcboxedtitleheight/2
-  },
-  boxed title style={ % draw wedges around the title
-    boxrule=0.5mm,
-    frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west)
-      -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east)
-      -- (frame.south east) -- (frame.south west) -- cycle; },
-    interior code={ \path[tcb fill interior] ([xshift=-2.5mm]interior.west)
-      -- (interior.north west) -- (interior.north east)
-      -- ([xshift=2.5mm]interior.east) -- (interior.south east) -- (interior.south west)
-      -- cycle;}
-  },
-  noparskip,
-  left=3mm, right=3mm, bottom=3mm,
-  sharp corners,
-  boxrule=0.5mm,
-  colframe=aiphiviolet,
-  colback=white,
-  colbacktitle=aiphiviolet!70!white,
-  coltitle=white
-}
-
-% box showing a tag besides the title
-% arguments: title, tag, tag background, tag foreground
-\NewTColorBox{tagbox}{m m O{black!80!white} O{white}}{
-  title=#1,
-  after title={\hfill\colorbox{#3}{\color{#4}#2}},
-  boxsep=0.5mm,
-  noparskip,
-  left=3mm, right=3mm, bottom=3mm, top=3mm,
-  sharp corners,
-  boxrule=0.5mm,
-  colframe=black!80!white,
-  colback=white,
-  colbacktitle=white,
-  coltitle=black
-}
-
-% box to cite stuff in
-\NewTColorBox{icitebox}{m}{
-  enhanced,
-  hbox,  % shrink to horizontal width of content
-  nobeforeafter,  % place in line with text
-  tcbox raise base,  % adjust vertical position
-  boxrule=0.4pt,
-  top=0mm, bottom=0mm, right=1.5pt, left=0mm,  % most margins controlled through title box
-  arc=0pt,
-  boxsep=-0.35pt,  % negative to remove gap between title colorbox and rule
-  colframe=aiphigreen!80!white,
-  coltext=aiphigreen!90!white,
-  colback=aiphigreen!10!white,
-  fontupper=\scriptsize\ttfamily,
-  fonttitle=\scriptsize\ttfamily,
-  attach title to upper,  % show title at left instead of above
-  title={\setlength{\fboxsep}{1.7pt}\colorbox{aiphigreen!90!white}{#1}},  % extra box to give background to title
-}
-
-% a color box inside a textblock to allow for arbitrary positioning
-\newenvironment{aside}[2]{
-  \begin{textblock*}{#1} (#2)
-    \begin{tcolorbox}[
-      enhanced,
-      noparskip,  % not using library parskip
-      left=1mm, right=1mm, bottom=1mm, top=1mm,
-      sharp corners,
-      boxrule=0.01mm,
-      colback=aiphiyellow,
-      coltext=black!80!white,
-      watermark tikz={\draw[line width=2mm] circle (1cm) node{\fontfamily{ptm}\fontseries{b}\fontsize{20mm}{20mm}\selectfont!};},
-      ]
-    }
-    {\end{tcolorbox}\end{textblock*}}
-
-% ----------------------------------------------------------
+% ---------------------------------------------------------------------------------------
 % TikZ
+% ---------------------------------------------------------------------------------------
 \usetikzlibrary{tikzmark, calc, arrows, spy}
 
 
-% ----------------------------------------------------------
-% code listings
-
-
-% all custom listing environments take keyword args and pass them along to lstlistings
-% but empty [] must be given if no optional args are used!
-
-
-
-% Define a new language for C++ to have proper detection of built in datatypes.
-% I hope I got all keywords.
-\lstdefinelanguage{aiphicpp}{
-  morekeywords={class, struct, template, typename, decltype, sizeof, static, if, else, for, while, do, goto, static_cast, dynamic_cast, reinterpret_cast, const_cast, constexpr, const, inline, and, or, xor, bitand, bitor, and_eq, or_eq, xor_eq, return, throw, try, catch, noexcept, namespace, using, typedef, enum, union, beak, continue, switch, case, break, continue, default, delete, new, operator, public, private, protected, explicit, extern, mutable, volatile, override, virtual, final},
-  morekeywords=[2]{void, unsigned, int, long, float, double, bool, char, auto},
-  morecomment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]",
-  morestring=[b]'
-}
-
-% custom style for code listings
-\lstdefinestyle{aiphilst}{
-  language=aiphicpp,  % the default language
-  basicstyle=\scriptsize\dvfamily,  % default font size
-  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
-  breaklines=true,
-  breakindent=2em,
-  postbreak=\mbox{\textcolor{aiphired}{\rotatebox[origin=c]{180}{$\Lsh$}}},
-  showstringspaces=false,  % show marker at spaces in strings
-  captionpos=b, % place captions below listing
-%
-  frame=l,                                  % frame around code, show only to the left
-  framerule=1.5pt,                          % frame width
-  rulecolor=\color{aiphibordeaux!75!white}, % colour of frame
-%
-  numbers=left,  % line numbers, one of none, left, right
-  numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
-%
-  commentstyle=\itshape\color{aiphipetrol},
-  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
-  keywordstyle={[2]\color{aiphigreen}},
-  stringstyle=\color{aiphired!90!black},
-}
-% set this style as default
-\lstset{style=aiphilst}
-% escape all code in (*  *) pairs
-\lstset{escapeinside={(*}{*)}}
-
-% Language that doesn't highlight anything.
-\lstdefinelanguage{aiphinull}{}
-
-% custom style for code listings
-\lstdefinestyle{aiphifile}{
-  language=aiphinull,  % the default language
-  basicstyle=\scriptsize\dvfamily\color{black!70!white},  % default font size
-  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
-  breaklines=true,
-  breakindent=2em,
-  postbreak=\mbox{\textcolor{aiphired}{\rotatebox[origin=c]{180}{$\Lsh$}}},
-  showstringspaces=false,  % show marker at spaces in strings
-  captionpos=b, % place captions below listing
-%
-  frame=l,                                  % frame around code, show only to the left
-  framerule=1.5pt,                          % frame width
-  rulecolor=\color{black!80!white}, % colour of frame
-%
-  numbers=left,  % line numbers, one of none, left, right
-  numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
-  backgroundcolor=\color{black!5!white}
-}
-
-% TODO ending code?
-% environment for file listings
-\lstnewenvironment{aiphifile}[1][]
-{\lstset{style=aiphifile}}
-{\lstset{style=aiphifile}}
-
-
-\lstdefinelanguage{aiphipseudo}{
-  morekeywords={repeat, if, else, for, white, unless, not, and, or},
-  morecomment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]",
-  morestring=[b]',
-}
-
-\lstdefinestyle{aiphipseudo}{
-  language=aiphipseudo,  % the default language
-  basicstyle=\scriptsize\dvfamily,  % default font size
-  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
-  breaklines=true,
-  breakindent=2em,
-  postbreak=\mbox{\textcolor{aiphiblue}{\rotatebox[origin=c]{180}{$\Lsh$}}},
-  showstringspaces=false,  % show marker at spaces in strings
-  captionpos=b, % place captions below listing
-%
-  frame=l,                                  % frame around code, show only to the left
-  framerule=1.5pt,                          % frame width
-  rulecolor=\color{black!75!white}, % colour of frame
-%
-  numbers=left,  % line numbers, one of none, left, right
-  numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
-%
-  commentstyle=\itshape\color{black!60!white},
-  keywordstyle={[1]\bfseries},
-  stringstyle=\color{aiphired!90!black},
-  emphstyle=\underbar,
-  literate=*{<-}{$\leftarrow$}{2} {->}{$\rightarrow$}{2},
-}
-
-% TODO ending code?
-% environment for pseudocode
-\lstnewenvironment{aiphipseudo}[1][1]
-{\lstset{style=aiphipseudo, #1}}
-{\lstset{style=aiphilst}}
-
-
-% Very simple language to highlight interactive shell commands, not scripts.
-\lstdefinelanguage{aiphishell}{
-  morekeywords={},
-  morecomment=[l]{\#},
-  morecomment=[s]{<}{>},
-  morestring=[b]",
-  morestring=[b]'
-}
-
-\lstdefinestyle{aiphishell}{
-  language=aiphishell,  % the default language
-  basicstyle=\scriptsize\dvfamily,  % default font size
-  breakatwhitespace=false,  % if true, lines are only broken at whitespaces
-  breaklines=true,
-  breakindent=2em,
-  postbreak=\mbox{\textcolor{aiphiblue}{\rotatebox[origin=c]{180}{$\Lsh$}}},
-  showstringspaces=false,  % show marker at spaces in strings
-  captionpos=b, % place captions below listing
-%
-  frame=l,  % frame around code, show only to the left
-  framerule=1.5pt,  % frame width
-  rulecolor=\color{aiphiblue!75!white}, % colour of frame
-%
-  numbers=none,  % no line numbers here
-%
-  commentstyle=\itshape\color{aiphipetrol},
-  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
-  keywordstyle={[2]\color{aiphigreen}},
-  stringstyle=\color{aiphired!90!black},
-}
-
-% show a prompt in shell session listings
-\makeatletter
-
-% store language for shells as command so we can use it for comparison below
-\newcommand\langname@aiphishell{}
-\def\langname@aiphishell{aiphishell}
-
-% define shell prompt
-\newcommand\prompt@aiphishell{{\color{aiphiblue}\$}\ }
-
-% add this to the beginning of every line (empty at first)
-\newcommand\addedToEveryPar@aiphishell{}
-\lst@AddToHook{EveryPar}{\addedToEveryPar@aiphishell}
-
-% show the prompt if language is aiphishell
-\lst@AddToHook{PreInit}{%
-  \ifx\lst@language\langname@aiphishell%
-    \let\addedToEveryPar@aiphishell\prompt@aiphishell%
-  \fi
-}
-
-\makeatother
-
-% environment to help with shell session listings
-\lstnewenvironment{aiphishell}[1][]
-{\lstset{language=aiphishell, style=aiphishell}}
-{\lstset{language=aiphicpp, style=aiphilst}}
-
-
-% ----------------------------------------------------------
-% handle backup / appendix slides
-% place these around backup slides so they are not counted by the progress bar
-\newcommand{\backupbegin}{
-   \newcounter{framenumberappendix}
-   \setcounter{framenumberappendix}{\value{framenumber}}
-}
-\newcommand{\backupend}{
-   \addtocounter{framenumberappendix}{-\value{framenumber}}
-   \addtocounter{framenumber}{\value{framenumberappendix}}
-}
-
-
-%----------------------------------------------------------
+% ---------------------------------------------------------------------------------------
 % abbreviations
+% ---------------------------------------------------------------------------------------
 \newcommand{\unit}[1]{\,\text{#1}}
 \newcommand{\ev}{\,\text{eV}}
 \newcommand{\kev}{\,\text{keV}}
 \newcommand{\mev}{\,\text{MeV}}
 \newcommand{\gev}{\,\text{GeV}}
 
-\renewcommand{\i}{\mathrm{i}}
-\renewcommand{\epsilon}{\varepsilon}
-
 \newcommand{\Tr}{\text{Tr}}
 
-
-% ----------------------------------------------------------
-% miscellanious
-
-% remember current item command so we can switch back to it
-\let\olditem\item
-
-% cite things inline using an icitebox
-\newcommand{\icite}[2]{\begin{icitebox}{#1}#2\end{icitebox}}
-\newcommand{\arxiv}[1]{\icite{arXiv}{\href{https://arxiv.org/abs/#1}{#1}}}
-\newcommand{\doi}[1]{\icite{doi}{\href{https://doi.org/#1}{#1}}}
 
 %%% Local Variables:
 %%% coding: utf-8

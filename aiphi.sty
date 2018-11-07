@@ -1,0 +1,70 @@
+%
+% Package aiphi
+%
+% A bunch of helper commands mainly geared towards presentations.
+% Needs the directory aiphi to be located at the document root dir.
+% Also needs XeTeX in order to select fonts.
+%
+% If you want to use a different beamer theme than aiphi, you have
+% to load that theme before this package!
+%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{aiphi}
+
+\RequirePackage{fontspec}
+\RequirePackage{aiphi/aiphiboxes}
+\RequirePackage{aiphi/aiphilisting}
+
+% ---------------------------------------------------------------------------------------
+% setup fonts
+% ---------------------------------------------------------------------------------------
+\newfontfamily\dvfamily{DejaVu Sans Mono}
+\newcommand{\textdv}[1]{{\dvfamily{}#1}}
+
+% use DejaVu Sans Mono in verbatim by default
+\def\verbatim@font{\dvfamily}
+
+
+% ---------------------------------------------------------------------------------------
+% setup beamer
+% ---------------------------------------------------------------------------------------
+
+% Hack aiphi into to beamer theme path.
+% It is not possible to load any other themes anymore after this!
+\@ifclassloaded{beamer}
+{\def\beamer@calltheme#1#2#3{%
+    \def\beamer@themelist{#2}
+    \@for\beamer@themename:=\beamer@themelist\do
+    {\usepackage[{#1}]{aiphi/#3\beamer@themename}}}
+}
+{}
+
+% Place these around backup slides so they are not counted by the progress bar.
+\@ifclassloaded{beamer}
+{\newcommand{\backupbegin}{
+    \newcounter{framenumberappendix}
+    \setcounter{framenumberappendix}{\value{framenumber}}
+  }
+  \newcommand{\backupend}{
+    \addtocounter{framenumberappendix}{-\value{framenumber}}
+    \addtocounter{framenumber}{\value{framenumberappendix}}
+  }}
+{}
+
+
+% ---------------------------------------------------------------------------------------
+% miscellaneous
+% ---------------------------------------------------------------------------------------
+
+% ISO date format
+\newdateformat{isodate}{\THEYEAR--\twodigit{\THEMONTH}--\twodigit{\THEDAY}}
+
+% Remember current item command so we can switch back to it.
+\let\olditem\item
+
+% change style of maths symbols
+\renewcommand{\i}{\mathrm{i}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\endinput
