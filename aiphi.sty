@@ -15,6 +15,7 @@
 \RequirePackage{fontspec}
 \RequirePackage{aiphi/aiphiboxes}
 \RequirePackage{aiphi/aiphilisting}
+\RequirePackage{relsize}
 
 % ---------------------------------------------------------------------------------------
 % setup fonts
@@ -66,5 +67,9 @@
 % change style of maths symbols
 \renewcommand{\i}{\mathrm{i}}
 \renewcommand{\epsilon}{\varepsilon}
+
+% pretty print C++
+\newcommand{\Rplus}{\protect\hspace{-.2em}\protect\raisebox{.6ex}{\smaller{\smaller{\smaller\textbf{+}}}}}
+\newcommand{\cpp}{\mbox{C\Rplus\Rplus}}
 
 \endinput
