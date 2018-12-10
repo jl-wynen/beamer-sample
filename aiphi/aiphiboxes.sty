@@ -66,6 +66,19 @@
   coltitle=black
 }
 
+% box for files similar to listings style
+\NewTColorBox{filebox}{}{
+  enhanced,
+  boxsep=0mm,
+  noparskip,
+  left=0mm, right=0mm, bottom=0mm, top=0mm,
+  sharp corners,
+  boxrule=-.1mm, leftrule=1.5pt,
+  colframe=black!80!white,
+  colback=black!5!white,
+  fontupper=\dvfamily\scriptsize,
+}
+
 % a color box inside a textblock to allow for arbitrary positioning
 \newenvironment{aside}[2]{
   \begin{textblock*}{#1} (#2)

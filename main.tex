@@ -152,48 +152,50 @@ Law of Continuity:
 \end{frame}
 
 \begin{frame}\frametitle{Directory Trees (or directory-like files)}
-  \begin{forest}
-  for tree={
-    font=\dvfamily,
-    grow'=0,
-    child anchor=west,
-    parent anchor=south,
-    anchor=west,
-    calign=first,
-    edge path={
-      \noexpand\path [draw, \forestoption{edge}, black!60!white, line width=.3mm]
-      ([xshift=7.5pt]!u.south west) |- node[fill,inner sep=.5mm] {} (.child anchor)\forestoption{edge label};
-    },
-    before typesetting nodes={
-      if n=1
-        {insert before={[,phantom]}}
-        {}
-    },
-    fit=band,
-    s sep=0mm,
-    before computing xy={l=15pt},
-  }
-  [{\color{aiphired}.h5}
-    [{\color{aiphipetrol}meta}
+  \begin{filebox}
+    \begin{forest}
+      for tree={
+        font=\dvfamily,
+        grow'=0,
+        child anchor=west,
+        parent anchor=south,
+        anchor=west,
+        calign=first,
+        edge path={
+          \noexpand\path [draw, \forestoption{edge}, black!60!white, line width=.3mm]
+          ([xshift=7.5pt]!u.south west) |- node[fill,inner sep=.5mm] {} (.child anchor)\forestoption{edge label};
+        },
+        before typesetting nodes={
+          if n=1
+          {insert before={[,phantom]}}
+          {}
+        },
+        fit=band,
+        s sep=0mm,
+        before computing xy={l=15pt},
+      }
+      [{\color{aiphired}.h5}
+      [{\color{aiphipetrol}meta}
       [action \textnormal{\color{black!60!white}[source of function]}]
       [lattice \textnormal{\color{black!60!white}[YAML]}]
       [params \textnormal{\color{black!60!white}[YAML]}]
-    ]
-    [{\color{aiphipetrol}configuration}
+      ]
+      [{\color{aiphipetrol}configuration}
       [0
-        [action \textnormal{\color{black!60!white}[complex number]}]
-        [phi \textnormal{\color{black!60!white}[complex lattice vector]}]
-        [trajPoint \textnormal{\color{black!60!white}[integer]}]
+      [action \textnormal{\color{black!60!white}[complex number]}]
+      [phi \textnormal{\color{black!60!white}[complex lattice vector]}]
+      [trajPoint \textnormal{\color{black!60!white}[integer]}]
       ]
       [\ldots, edge path={
         \noexpand\path [draw, \forestoption{edge}, dashed, black!60!white, line width=.3mm]
         ([xshift=7.5pt]!u.south west) |- ([xshift=-7.5pt].child anchor)\forestoption{edge label};
       }]
-    ]
-    [{\color{aiphipetrol}checkpoint}]
-    [\textit{\color{aiphipetrol}<measurements>}]
-  ]
-  \end{forest}
+      ]
+      [{\color{aiphipetrol}checkpoint}]
+      [\textit{\color{aiphipetrol}<measurements>}]
+      ]
+    \end{forest}
+  \end{filebox}
 \end{frame}
 
 \subsection{Blocks}
