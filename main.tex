@@ -65,6 +65,67 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}\frametitle{Advanced overlays}
+  Changing colours and appearing underbrace:
+  \begin{align*}
+    \mathcal{C}_{SM}(n^2) \equiv \mathcal{F}_{n^2}\bigg(\; {\color<1,2>{aiphired}\sum_{\{\mathcal{B}^3\}}}\; {\color<-3>{white}\color<3->{aiphiblue}\underbrace{\color<1>{black}\color<2>{aiphiblue}\sum_I\, T_I \mathcal{B}^3_I}_{N}}\;\bigg)
+  \end{align*}
+
+  \begin{overprint}
+    \onslide<1>
+    \textbf{Pros and Cons list}
+    \begin{itemize}\setlength\itemsep{1em}
+    \item Use symmetries
+    \item E.g. isosinglet $NN$ from just $\langle np\bar{n}\bar{p} \rangle$
+      \addtolength{\itemindent}{.5mm}
+    \item[\color{aiphigreen}\bfseries+] Very effective
+      \addtolength{\itemindent}{-.5mm}
+    \item[\color{aiphired}\bfseries--] Manual at the moment
+    \end{itemize}
+
+    \onslide<2>
+    \textbf{Some more items}
+    \begin{itemize}\setlength\itemsep{1em}
+    \item $\mathcal{B}$ expensive $\Rightarrow$ reuse
+      \addtolength{\itemindent}{.5mm}
+    \item[\color{aiphigreen}\bfseries+] Automated, but \emph{Traveling Salesperson}
+    \item[\color{aiphigreen}\bfseries+] Effective for 2N
+      \addtolength{\itemindent}{-.5mm}
+    \item[\color{aiphired}\bfseries--] $\color{aiphiblue}\sum_I$ dominates for 3N
+    \end{itemize}
+
+    \onslide<3>
+    \textbf{Fancy slide with graph}
+    \begin{columns}
+      \begin{column}{.59\framewidth}
+        \begin{itemize}\setlength\itemsep{1em}
+        \item Put each unique combination of blocks on a vertex
+        \item Weigh edges by number of shared blocks of connected vertices
+        \item Find optimal path (maximum weight)
+        \end{itemize}
+      \end{column}
+      \begin{column}{.4\framewidth}
+        \begin{center}
+          \begin{tikzpicture}
+            \node (n0) at (0, 0) [circle, draw=aiphiblue, fill=aiphiblue!70!white, text=white, font=\fontsize{7}{0}\selectfont] {$N_0$};
+            \node (n1) at (-2, -1) [circle, draw=aiphiblue, fill=aiphiblue!70!white, text=white, font=\fontsize{7}{0}\selectfont] {$N_1$};
+            \node (n2) at (-1.5, -3) [circle, draw=aiphiblue, fill=aiphiblue!70!white, text=white, font=\fontsize{7}{0}\selectfont] {$N_2$};
+            \node (n3) at (1, -2.5) [circle, draw=aiphiblue, fill=aiphiblue!70!white, text=white, font=\fontsize{7}{0}\selectfont] {$N_3$};
+            \node (n4) at (1.5, -1) [circle, draw=aiphiblue, fill=aiphiblue!70!white, text=white, font=\fontsize{7}{0}\selectfont] {$N_4$};
+
+            \draw (n0) -- node [rectangle, fill=white, text=aiphiblue] {1} (n1) [draw=aiphiblue, line width=.3mm];
+            \draw (n0) -- node [rectangle, fill=white, text=aiphiblue] {2} (n4) [draw=aiphiblue, line width=.3mm];
+            \draw (n3) -- node [rectangle, fill=white, text=aiphiblue] {2} (n4) [draw=aiphiblue, line width=.3mm];
+            \draw (n0) -- node [rectangle, fill=white, text=aiphiblue] {2} (n3) [draw=aiphiblue, line width=.3mm];
+            \draw (n1) -- node [rectangle, fill=white, text=aiphiblue] {1} (n2) [draw=aiphiblue, line width=.3mm];
+            \draw (n2) -- node [rectangle, fill=white, text=aiphiblue] {1} (n3) [draw=aiphiblue, line width=.3mm];
+          \end{tikzpicture}
+        \end{center}
+      \end{column}
+    \end{columns}
+  \end{overprint}
+\end{frame}
+
 \section{Second}
 \subsection{First Sub}
 % we need fragile so the code listing can position itself properly
