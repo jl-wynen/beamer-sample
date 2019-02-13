@@ -21,6 +21,7 @@
 \usepackage{lmodern}            % to scale font to whatever I want
 \usepackage{verbatim}           % print input as it is
 \usepackage{xfrac}              % sideways fractions
+\usepackage{ccicons}            % creative commons icons
 
 % For textblock, remove showboxes for release.
 % Gets loaded by aiphi, but this way we can specify showboxes.
@@ -46,8 +47,10 @@
 \newcommand{\thesubtitle}{Does this subtitle appear anywhere?}
 \newcommand{\thedate}{\isodate\today}
 \newcommand{\thelogo}{\includegraphics[width=10mm]{logo.pdf}}
+\newcommand{\thelicense}{\href{http://creativecommons.org/licenses/by/4.0/}{\ccby}}
 
-\author{\theauthor}
+% show just the author on the titlepage but include the license in the footline
+\author[\thelicense\quad\theauthor]{\theauthor}
 \title{\thetitle}
 \date{\thedate}
 \institute{\theinstitute}
