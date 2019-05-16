@@ -14,9 +14,12 @@
 
 % requirements
 \RequirePackage{tikz}
+\RequirePackage{keyval}
 
 
+% ---------------------------------------------------------------------------------------
 % frametitle
+% ---------------------------------------------------------------------------------------
 \setbeamertemplate{frametitle} {
   \nointerlineskip
   \begin{beamercolorbox}[sep=0.12cm,ht=1.3em,wd=\paperwidth]{frametitle}
@@ -26,10 +29,14 @@
   \end{beamercolorbox}
 }
 
-% basic footline
+
+% ---------------------------------------------------------------------------------------
+% base footline
+% ---------------------------------------------------------------------------------------
+% code encapsulated in custom template to be used mixed and matched for customisations
 \if@themeaiphi@titleinfoot
   % show title
-  \setbeamertemplate{footline} {
+  \setbeamertemplate{aiphi footline} {
     \leavevmode%
     \hbox{%
       \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
@@ -47,7 +54,7 @@
 
 \else
   % don't show title
-  \setbeamertemplate{footline} {
+  \setbeamertemplate{aiphi footline} {
     \leavevmode%
     \hbox{%
       \begin{beamercolorbox}[wd=.50\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
@@ -101,9 +108,88 @@
   }
 \fi
 
-\addtobeamertemplate{footline}{\usebeamertemplate*{progress bar in head/foot}}{}
+\addtobeamertemplate{aiphi footline}{\usebeamertemplate*{progress bar in head/foot}}{}
 
+
+% ---------------------------------------------------------------------------------------
+% sidebars
+% ---------------------------------------------------------------------------------------
 % remove the right sidebar -> removes logo from all frames but title page
 \setbeamertemplate{sidebar right}{}
+
+
+% ---------------------------------------------------------------------------------------
+% default templates
+% ---------------------------------------------------------------------------------------
+\defbeamertemplate{headline}{aiphi default}{}
+\defbeamertemplate{footline}{aiphi default}{\usebeamertemplate*{aiphi footline}}
+\setbeamersize{sidebar width left=0.7mm}
+\defbeamertemplate{sidebar canvas left}{aiphi default}{}
+\setbeamersize{sidebar width right=0.7mm}
+\defbeamertemplate{sidebar canvas right}{aiphi default}{}
+
+% activate default templates
+% This seems necessary in addition to the frame specific code below
+% to get all the sizes correct.
+\setbeamertemplate{headline}[aiphi default]
+\setbeamertemplate{footline}[aiphi default]
+\setbeamertemplate{sidebar canvas left}[aiphi default]
+\setbeamertemplate{sidebar canvas right}[aiphi default]
+
+% activate defaults at every new frame
+\BeforeBeginEnvironment{frame}{%
+  \setbeamertemplate{headline}[aiphi default]%
+  \setbeamertemplate{footline}[aiphi default]%
+  \setbeamertemplate{sidebar canvas left}[aiphi default]%
+  \setbeamertemplate{sidebar canvas right}[aiphi default]%
+}
+
+
+% ---------------------------------------------------------------------------------------
+% frame border
+% ---------------------------------------------------------------------------------------
+% components of the border with fixed dimensions
+\setbeamertemplate{aiphi frame border horizontal}{%
+  \nointerlineskip{}
+  \begin{beamercolorbox}[wd=\paperwidth, ht=0.7mm]{frame border}
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{aiphi frame border vertical}{%
+  \begin{beamercolorbox}[wd=0.7mm, ht=\paperheight]{frame border}
+  \end{beamercolorbox}
+}
+
+% versions of templates that show a border
+\defbeamertemplate{headline}{aiphi border}{%
+  \usebeamertemplate*{aiphi frame border horizontal}%
+}
+
+\defbeamertemplate{footline}{aiphi border}{%
+  \usebeamertemplate*{aiphi frame border horizontal}
+  % add gap between border and normal footline
+  \begin{beamercolorbox}[wd=\paperwidth, ht=0.3mm]{normal text}
+  \end{beamercolorbox}
+  \usebeamertemplate*{aiphi footline}%
+}
+
+\defbeamertemplate{sidebar canvas left}{aiphi border}{%
+  \usebeamertemplate*{aiphi frame border vertical}%
+}
+
+\defbeamertemplate{sidebar canvas right}{aiphi border}{%
+  \usebeamertemplate*{aiphi frame border vertical}%
+}
+
+% a new frame option to enable the border
+\makeatletter
+\define@key{beamerframe}{border}[true]{%
+  \setbeamertemplate{headline}[aiphi border]%
+  \setbeamertemplate{footline}[aiphi border]%
+  \setbeamertemplate{sidebar canvas left}[aiphi border]%
+  \setbeamertemplate{sidebar canvas right}[aiphi border]%
+}
+\makeatother
+
 
 \mode<all>
