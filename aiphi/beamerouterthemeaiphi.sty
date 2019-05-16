@@ -15,7 +15,7 @@
 % requirements
 \RequirePackage{tikz}
 \RequirePackage{keyval}
-
+\RequirePackage{graphics}
 
 % ---------------------------------------------------------------------------------------
 % frametitle
@@ -181,6 +181,24 @@
   \usebeamertemplate*{aiphi frame border vertical}%
 }
 
+\defbeamertemplate{headline}{aiphi wip}{%
+  \usebeamertemplate*{aiphi frame border horizontal}%
+  \leavevmode%
+  \hbox{%
+    % place left border first
+    \begin{beamercolorbox}[wd=0.7mm, ht=0.6cm]{frame border}
+    \end{beamercolorbox}%
+    % image and WIP text
+    \begin{beamercolorbox}[wd={\dimexpr\paperwidth-1.4mm}, ht=0.6cm, ignorebg, right]{wip}\normalsize
+      \includegraphics[height=0.5cm]{aiphi/wipsign.pdf}\raisebox{0.1cm}{WIP}\hspace{0.2cm}
+    \end{beamercolorbox}%
+    % right border
+    \begin{beamercolorbox}[wd=0.7mm, ht=0.6cm]{frame border}
+    \end{beamercolorbox}
+  }
+  \vskip0pt%
+}
+
 % a new frame option to enable the border
 \makeatletter
 \define@key{beamerframe}{border}{%
@@ -190,7 +208,11 @@
   \setbeamertemplate{sidebar canvas left}[aiphi border]%
   \setbeamertemplate{sidebar canvas right}[aiphi border]%
 }
-\makeatother
 
+\define@key{beamerframe}{wip}[]{%
+  \setkeys{beamerframe}{border=aiphiorange}%
+  \setbeamertemplate{headline}[aiphi wip]%
+}
+\makeatother
 
 \mode<all>

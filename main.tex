@@ -326,6 +326,28 @@ Law of Continuity:
   \end{center}
 \end{frame}
 
+\begin{frame}[wip, fragile]
+  \scriptsize
+  Here is a handy guide for modifying colour in included PDFs:
+  \begin{itemize}
+  \item Uncompress PDF if necessary
+    \begin{shell}[]
+# check if it is compressed
+strings wipsign.pdf | grep /Filter
+# uncompress
+qpdf --stream-data=uncompress image.pdf uncompressed.pdf
+    \end{shell}
+  \item Remove colour from content stream. For this, look for keys \verb$rg$ (fill colour), \verb$RG$ (line colour) in RGB model or \verb$k$ and \verb$K$ in YMCK model. The numbers before that are the colour values.
+    Replace the first character in that command with \verb$%$ to comment out the line. \emph{Do not change the length of the file or positions of commands!}
+  \item Recompress
+    \begin{shell}[]
+qpdf --stream-data=compress uncompressed.pdf image-no-colour.pdf
+    \end{shell}
+  \item Include graphic in \LaTeX, it will use the current text colour!
+  \item See image in frame corner for result.
+  \end{itemize}
+\end{frame}
+
 \begin{frame}\frametitle{Arrows}
   % mark start node n1 and target node t1
   Some text with a \tikzmark{n1}note\\[2ex]
