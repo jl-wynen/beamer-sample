@@ -183,7 +183,8 @@
 
 % a new frame option to enable the border
 \makeatletter
-\define@key{beamerframe}{border}[true]{%
+\define@key{beamerframe}{border}{%
+  \setbeamercolor{frame border}{bg=#1}
   \setbeamertemplate{headline}[aiphi border]%
   \setbeamertemplate{footline}[aiphi border]%
   \setbeamertemplate{sidebar canvas left}[aiphi border]%
