@@ -167,7 +167,19 @@ class cat:
   def show(self):
     # watch out for auto line breaks:
     print(f"A {self._shape} shaped hat in a now {self._shape} shaped cat")
-  \end{pycode}
+
+# highlight something in code, note that it doesn't play nice with the listing border
+(*\hspace{-1.5mm}\begin{highlightbox}{}{\bfseries\color{aiphiblue!75!white}def} a\_very\_important\_function(cat):\end{highlightbox}*)
+  cat.show()
+\end{pycode}
+
+{\scriptsize
+  You can also
+  \begin{highlightbox}{}\sffamily
+    highlight stuff with a box
+  \end{highlightbox}
+  outside of code
+}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Pseudocode}

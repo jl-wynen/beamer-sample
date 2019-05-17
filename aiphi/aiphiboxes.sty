@@ -95,6 +95,22 @@
     }
     {\end{tcolorbox}\end{textblock*}}
 
+
+% highlight a bit of text
+\NewTColorBox{highlightbox}{m}{
+  standard jigsaw,  % allow transparent background
+  hbox,  % shrink to horizontal width of content
+  nobeforeafter,  % place in line with text
+  tcbox raise base,  % adjust vertical position
+  boxrule=0.8pt,
+  top=0mm, bottom=0mm, right=1.5pt, left=0mm,  % most margins controlled through title box
+  arc=0pt,
+  opacityback=0,
+  colframe=aiphiemph1,
+  coltext=aiphitext,
+  fontupper=\scriptsize\dvfamily,
+}
+
 % box to cite stuff in
 \NewTColorBox{icitebox}{m}{
   enhanced,
