@@ -31,16 +31,16 @@
 %
   frame=l,  % frame around code, show only to the left
   framerule=1.5pt,  % frame width
-  rulecolor=\color{black!75!white},  % colour of frame
+  rulecolor=\color{aiphibackground!80!aiphitext},  % colour of frame
 %
   numbers=left,  % line numbers, one of none, left, right
   numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
+  numberstyle=\tiny\color{aiphibackground!15!aiphitext},  % text style of line numbers
 %
-  commentstyle=\itshape\color{black!60!white},
-  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
-  keywordstyle={[2]\color{aiphigreen}},
-  stringstyle=\color{aiphired!90!black},
+  commentstyle=\itshape\color{aiphibackground!40!aiphitext},
+  keywordstyle={[1]\bfseries\color{aiphiemph2}},
+  keywordstyle={[2]\color{aiphiemph3}},
+  stringstyle=\color{aiphiemph1},
 }
 % set this style as default
 \lstset{style=aiphilst}
@@ -90,7 +90,7 @@
 % custom style for code listings
 \lstdefinestyle{aiphifile}{
   language=aiphinull,  % the default language
-  basicstyle=\scriptsize\dvfamily\color{black!70!white},  % default font size
+  basicstyle=\scriptsize\dvfamily\color{aiphibackground!15!aiphitext},  % default font size
   breakatwhitespace=false,  % if true, lines are only broken at whitespaces
   breaklines=true,
   breakindent=2em,
@@ -102,11 +102,7 @@
   framerule=1.5pt,                          % frame width
   rulecolor=\color{black!80!white}, % colour of frame
 %
-  numbers=left,  % line numbers, one of none, left, right
-  numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
-%
-  backgroundcolor=\color{black!5!white}
+  backgroundcolor=\color{aiphibackground!95!aiphitext}
 }
 
 % environment for file listings
@@ -140,10 +136,6 @@
   frame=l,                                  % frame around code, show only to the left
   framerule=1.5pt,                          % frame width
   rulecolor=\color{black!75!white}, % colour of frame
-%
-  numbers=left,  % line numbers, one of none, left, right
-  numbersep=6pt, % distance of line numbers from code
-  numberstyle=\tiny\color{black},  % text style of line numbers
 %
   commentstyle=\itshape\color{black!60!white},
   keywordstyle={[1]\bfseries},
@@ -183,14 +175,14 @@
 %
   frame=l,  % frame around code, show only to the left
   framerule=1.5pt,  % frame width
-  rulecolor=\color{aiphiblue!80!black}, % colour of frame
+  rulecolor=\color{aiphiemph2!60!aiphibackground}, % colour of frame
 %
   numbers=none,  % no line numbers here
 %
   commentstyle=\itshape\color{aiphipetrol},
-  keywordstyle={[1]\bfseries\color{aiphiblue!75!white}},
-  keywordstyle={[2]\color{aiphigreen}},
-  stringstyle=\color{aiphired!90!black},
+  keywordstyle={[1]\bfseries\color{aiphiemph2}},
+  keywordstyle={[2]\color{aiphiemph3}},
+  stringstyle=\color{aiphiemph1},
 }
 
 % show a prompt in shell session listings
@@ -201,7 +193,7 @@
 \def\langname@aiphishell{aiphishell}
 
 % define shell prompt
-\newcommand\prompt@aiphishell{{\color{aiphiblue}\$}\ }
+\newcommand\prompt@aiphishell{{\color{aiphiemph2!60!aiphibackground}\$}\ }
 
 % add this to the beginning of every line (empty at first)
 \newcommand\addedToEveryPar@aiphishell{}

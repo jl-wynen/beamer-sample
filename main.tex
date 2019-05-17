@@ -187,14 +187,14 @@ class cat:
 \begin{frame}[fragile]\frametitle{Pseudocode}
   \begin{aiphipseudo}[emph={isingmc}, caption={Some MC pseudocode}]
 isingmc (cfg) -> E, m:
-    (*\color{aiphigreen}E $\leftarrow$ hamiltonian(E)*)
+    (*\emphc{E $\leftarrow$ hamiltonian(E)}*)
 
     repeat ntherm:
-        cfg(*\color{aiphigreen}, E*) <- sweep(cfg(*\color{aiphigreen}, E*))
+        cfg, (*\emphc{E}*) <- sweep(cfg, (*\emphc{E}*))
 
     repeat nprod:
-        cfg(*\color{aiphigreen}, E*) <- sweep(cfg(*\color{aiphigreen}, E*))
-        (*\color{aiphired}E $\leftarrow$ hamiltonian(cfg)*)
+        cfg, (*\emphc{E}*) <- sweep(cfg, (*\emphc{E}*))
+        (*\empha{E $\leftarrow$ hamiltonian(cfg)}*)
         m <- magnetisation(cfg)
 
         // do something with E, m
@@ -249,7 +249,7 @@ Law of Continuity:
         s sep=0mm,
         before computing xy={l=15pt},
       }
-      [{\color{aiphired}.h5}
+      [\empha{.h5}
       [{\color{aiphipetrol}meta}
       [action \textnormal{\color{black!60!white}[source of function]}]
       [lattice \textnormal{\color{black!60!white}[YAML]}]
