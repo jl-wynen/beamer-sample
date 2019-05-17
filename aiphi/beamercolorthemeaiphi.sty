@@ -1,14 +1,25 @@
 \mode<presentation>
 
-\definecolor{aiphiblue}     {RGB}{0,84,159}
-\definecolor{aiphibordeaux} {RGB}{161,16,53}
-\definecolor{aiphiyellow}   {RGB}{255,237,0}
-\definecolor{aiphigreen}    {RGB}{87,171,39}
-\definecolor{aiphiorange}   {RGB}{224,71,40}
-\definecolor{aiphipetrol}   {RGB}{0,97,101}
-\definecolor{aiphired}      {RGB}{204,7,30}
-\definecolor{aiphiviolet}   {RGB}{97,33,88}
+% base colours
+\definecolor{aiphiblue}      {RGB}{0,84,159}
+\definecolor{aiphibordeaux}  {RGB}{161,16,53}
+\definecolor{aiphidark}      {RGB}{45,38,50}
+\definecolor{aiphidarkachrom}{RGB}{22,22,22}
+\definecolor{aiphigreen}     {RGB}{87,171,39}
+\definecolor{aiphiorange}    {RGB}{224,71,40}
+\definecolor{aiphipetrol}    {RGB}{0,97,101}
+\definecolor{aiphired}       {RGB}{204,7,30}
+\definecolor{aiphiviolet}    {RGB}{97,33,88}
+\definecolor{aiphiyellow}    {RGB}{255,237,0}
 
+% colours for specific purposes
+\colorlet{aiphibackground}{white}
+\colorlet{aiphiemph1}{aiphired}
+\colorlet{aiphiemph2}{aiphiblue}
+\colorlet{aiphitext}{aiphidarkachrom}
+
+\setbeamercolor{background canvas}        {bg=aiphibackground}
+\setbeamercolor{normal text}              {fg=aiphitext}
 \setbeamercolor{item}                     {fg=aiphibordeaux}
 \setbeamercolor{title}                    {bg=white, fg=aiphired}
 \setbeamercolor{frametitle}               {fg=aiphired}
