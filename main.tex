@@ -332,6 +332,25 @@ Law of Continuity:
   \end{tagbox}
 \end{frame}
 
+{
+  \usebackgroundtemplate{\begin{tikzpicture}
+      \clip (0, 0) rectangle (\paperwidth, \paperheight);
+      \filldraw[fill=aiphibackground] (-1, -1) rectangle (\paperwidth+1, \paperheight+1);
+      \node[opacity=0.3] at (0.97\paperwidth, 0.96\paperheight) {\includegraphics[width=5cm, height=!]{background.pdf}};
+    \end{tikzpicture}
+  }
+  \begin{frame}
+    \begin{center}\huge
+      A custom background\\
+      \small\color{aiphitext!50!aiphibackground}
+      (This one is optimised for the dark theme)
+    \end{center}
+
+    Use the \textbackslash{}usebackgroundtemplate command in the preamble to make this global.
+    Then you can use \textbackslash{}plainbackground to disable the image per slide.
+  \end{frame}
+}
+
 \begin{frame}[border=aiphipetrol]
   \begin{center}\huge
     A frame with a border
