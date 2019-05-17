@@ -73,4 +73,11 @@
 \newcommand{\Rplus}{\protect\hspace{-.2em}\protect\raisebox{.6ex}{\smaller{\smaller{\smaller\textbf{+}}}}}
 \newcommand{\cpp}{\mbox{C\Rplus\Rplus}}
 
+% use this to remove an image from the background (i.e. draw a plain colour as background)
+\newcommand{\plainbackground}{\usebackgroundtemplate{\begin{tikzpicture}
+    \clip (0, 0) rectangle (\paperwidth, \paperheight);
+    \filldraw[fill=aiphibackground] (-1, -1) rectangle (\paperwidth+1, \paperheight+1);
+  \end{tikzpicture}}
+}
+
 \endinput
