@@ -69,6 +69,12 @@
 \renewcommand{\i}{\mathrm{i}}
 \renewcommand{\epsilon}{\varepsilon}
 
+% custom emphasis
+\newcommand{\empha}[1]{{\color{aiphiemph1}#1}}
+\newcommand{\emphb}[1]{{\color{aiphiemph2}#1}}
+\newcommand{\emphc}[1]{{\color{aiphiemph3}#1}}
+\renewcommand{\emph}[1]{\empha{#1}}
+
 % pretty print C++
 \newcommand{\Rplus}{\protect\hspace{-.2em}\protect\raisebox{.6ex}{\smaller{\smaller{\smaller\textbf{+}}}}}
 \newcommand{\cpp}{\mbox{C\Rplus\Rplus}}
