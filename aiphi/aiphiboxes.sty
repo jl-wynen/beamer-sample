@@ -117,17 +117,17 @@
   hbox,  % shrink to horizontal width of content
   nobeforeafter,  % place in line with text
   tcbox raise base,  % adjust vertical position
-  boxrule=0.4pt,
+  boxrule=0.pt,
   top=0mm, bottom=0mm, right=1.5pt, left=0mm,  % most margins controlled through title box
   arc=0pt,
-  boxsep=-0.35pt,  % negative to remove gap between title colorbox and rule
-  colframe=aiphigreen!80!white,
-  coltext=aiphigreen!90!white,
-  colback=aiphigreen!10!white,
-  fontupper=\scriptsize\ttfamily,
-  fonttitle=\scriptsize\ttfamily,
+  boxsep=-0mm,
+  colframe=aiphibackground,
+  coltext=aiphitext!70!aiphibackground,
+  colback=aiphigreen!25!aiphibackground,
+  fontupper=\scriptsize\dvfamily,
+  fonttitle=\scriptsize\dvfamily,
   attach title to upper,  % show title at left instead of above
-  title={\setlength{\fboxsep}{1.7pt}\colorbox{aiphigreen!90!white}{#1}},  % extra box to give background to title
+  title={\setlength{\fboxsep}{1.7pt}\colorbox{aiphibackground!95!aiphigreen}{\color{aiphigreen!80!aiphibackground}#1}},  % extra box to give background to title
 }
 
 % cite things inline using an icitebox
