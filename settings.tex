@@ -49,8 +49,8 @@
 \newcommand{\thelogo}{\includegraphics[width=10mm]{logo.pdf}}
 \newcommand{\thelicense}{\href{http://creativecommons.org/licenses/by/4.0/}{\ccby}}
 
-% show just the author on the titlepage but include the license in the footline
-\author[\thelicense\quad\theauthor]{\theauthor}
+% show author and contributors on title page and author + license in footline
+\author[\thelicense\quad\theauthor]{\textbf{\theauthor}\\\vspace{1ex}M. Sue \and M. Mustermann}
 \title{\thetitle}
 \date{\thedate}
 \institute{\theinstitute}
@@ -60,7 +60,10 @@
 % ---------------------------------------------------------------------------------------
 % setup beamer
 % ---------------------------------------------------------------------------------------
+% load base theme
 \usetheme[titleinfoot, toc, rainbow]{aiphi}
+% select dark colour theme
+% \usecolortheme{aiphidark}
 
 
 % ---------------------------------------------------------------------------------------
