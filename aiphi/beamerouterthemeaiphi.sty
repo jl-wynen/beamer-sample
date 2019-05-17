@@ -83,12 +83,15 @@
         % a violet that is better suited than aiphiviolet
         \definecolor{tempviolet}{RGB}{140,42,126}
 
-        \fill[shade, left color=aiphired, right color=aiphiyellow] (0,0) rectangle (.25\paperwidth, 0.3em);
-        \fill[shade, left color=aiphiyellow, right color=aiphigreen] (.25\paperwidth,0) rectangle (.5\paperwidth, 0.3em);
-        \fill[shade, left color=aiphigreen, right color=aiphiblue!90!white] (.5\paperwidth,0) rectangle (.75\paperwidth, 0.3em);
-        \fill[shade, left color=aiphiblue!90!white, right color=tempviolet] (.75\paperwidth,0) rectangle (\paperwidth, 0.3em);
-%aiphiviolet!90!white
-        \fill[fill=bg] (\aiphi@progressinheadfoot,0) rectangle (\paperwidth, 0.3em);
+        \fill[shade, left color=aiphired, right color=aiphiyellow] (0,0) rectangle (.25\paperwidth, 0.15mm);
+        \fill[shade, left color=aiphiyellow, right color=aiphigreen] (.25\paperwidth,0) rectangle (.5\paperwidth, 0.15mm);
+        \fill[shade, left color=aiphigreen, right color=aiphiblue!90!white] (.5\paperwidth,0) rectangle (.75\paperwidth, 0.15mm);
+        \fill[shade, left color=aiphiblue!90!white, right color=tempviolet] (.75\paperwidth,0) rectangle (\paperwidth, 0.15mm);
+        % Somehow the part that is supposed to be covered is still visible when zoomed out even
+        % with the larger rectangle chosen below.
+        % \fill[fill=bg] (\aiphi@progressinheadfoot,-0.1mm) rectangle (\paperwidth, 0.25mm);
+        % Don't fully cover, just make it darker.
+        \fill[fill=bg, fill opacity=0.8] (\aiphi@progressinheadfoot,0mm) rectangle (\paperwidth, 0.15mm);
       \end{tikzpicture}%
     \end{beamercolorbox}
   }
@@ -101,8 +104,8 @@
     }%
     \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
       \begin{tikzpicture}
-        \draw[bg, fill=bg] (0,0) rectangle (\paperwidth, 0.2em);
-        \draw[fg, fill=fg] (0,0) rectangle (\aiphi@progressinheadfoot, 0.2em);
+        \draw[bg, fill=bg] (0,0) rectangle (\paperwidth, 0.15mm);
+        \draw[fg, fill=fg] (0,0) rectangle (\aiphi@progressinheadfoot, 0.15mm);
       \end{tikzpicture}%
     \end{beamercolorbox}
   }
