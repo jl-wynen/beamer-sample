@@ -19,7 +19,8 @@
   sharp corners,
   boxrule=0.5mm,
   colframe=aiphiblue,
-  colback=white
+  colback=aiphibackground,
+  coltext=aiphitext
 }
 
 % box with a fancy title
@@ -45,7 +46,8 @@
   sharp corners,
   boxrule=0.5mm,
   colframe=aiphiviolet,
-  colback=white,
+  colback=aiphibackground,
+  coltext=aiphitext,
   colbacktitle=aiphiviolet!70!white,
   coltitle=white
 }
@@ -60,10 +62,11 @@
   left=3mm, right=3mm, bottom=3mm, top=3mm,
   sharp corners,
   boxrule=0.5mm,
-  colframe=black!80!white,
-  colback=white,
-  colbacktitle=white,
-  coltitle=black
+  colframe=aiphibackground!40!aiphitext,
+  colback=aiphibackground,
+  coltext=aiphitext,
+  colbacktitle=aiphibackground,
+  coltitle=aiphitext
 }
 
 % box for files similar to listings style
@@ -74,8 +77,9 @@
   left=0mm, right=0mm, bottom=0mm, top=0mm,
   sharp corners,
   boxrule=-.1mm, leftrule=1.5pt,
-  colframe=black!80!white,
-  colback=black!5!white,
+  colframe=aiphibackground!80!aiphitext,
+  colback=aiphibackground!95!aiphitext,
+  coltext=aiphibackground!15!aiphitext,
   fontupper=\dvfamily\scriptsize,
 }
 
@@ -88,7 +92,7 @@
       left=1mm, right=1mm, bottom=1mm, top=1mm,
       sharp corners,
       boxrule=0.01mm,
-      colback=aiphiyellow,
+      colback=aiphiyellow!75!aiphibackground,
       coltext=black!80!white,
       watermark tikz={\draw[line width=2mm] circle (1cm) node{\fontfamily{ptm}\fontseries{b}\fontsize{20mm}{20mm}\selectfont!};},
       ]
