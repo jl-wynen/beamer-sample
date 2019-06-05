@@ -427,6 +427,18 @@ qpdf --stream-data=compress uncompressed.pdf image-no-colour.pdf
   \end{tikzpicture}
 \end{frame}
 
+\begin{frame}\frametitle{Custom aiphi style for Matplotlib}
+  \begin{center}
+    \begin{enumerate}
+    \item Copy \textdv{\small extra/aiphidark.mplstyle} into your plotting directory
+    \item Use the style by, e.g.\ \textdv{\small plt.style.use('aiphidark.mplstyle')}
+    \end{enumerate}
+    \vfill
+    \includegraphics[height=0.6\paperheight]{extra/plots.pdf}
+    \vspace{-1.5em}
+  \end{center}
+\end{frame}
+
 % This is super slow with XeTeX!
 % {
 %   % show tiny text in background
