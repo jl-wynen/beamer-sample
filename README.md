@@ -19,3 +19,8 @@ Use it as shown in `settings.tex`, use the package aiphi and set the beamer them
 ### Sample Presentation
 Compile `main.tex` using XeLaTeX (must be XeLaTeX because it uses fontspec).
 Samples are implemented in `main.tex` and custom settings and commands can be found in `settings.tex`.
+
+### Matplotlib Style
+There is a style sheet for matplotlib in the folder [extra](extra).
+It sets a colour palette compatible with the dark beamer theme.
+To use it, simply copy `extra/aiphidark.mplstyle` into your plotting project and activate the style using, e.g. `plt.style.use('aiphidark.mplstyle')`.
