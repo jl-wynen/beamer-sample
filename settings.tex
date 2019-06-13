@@ -25,7 +25,7 @@
 
 % For textblock, remove showboxes for release.
 % Gets loaded by aiphi, but this way we can specify showboxes.
-\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage[absolute,overlay]{textpos}
 
 % load customisations
 \usepackage{aiphi}
@@ -37,33 +37,44 @@
 
 
 % ---------------------------------------------------------------------------------------
-% general info
-% ---------------------------------------------------------------------------------------
-
-% commands so we can refer to these later
-\newcommand{\theauthor}{Jan-Lukas Wynen}
-\newcommand{\theinstitute}{Institute for applied \LaTeX}
-\newcommand{\thetitle}{Fancy shmancy talk}
-\newcommand{\thesubtitle}{Does this subtitle appear anywhere?}
-\newcommand{\thedate}{\isodate\today}
-\newcommand{\thelogo}{\includegraphics[width=10mm]{logo.pdf}}
-\newcommand{\thelicense}{\href{http://creativecommons.org/licenses/by/4.0/}{\ccby}}
-
-% show author and contributors on title page and author + license in footline
-\author[\thelicense\quad\theauthor]{\textbf{\theauthor}\\\vspace{1ex}M. Sue \and M. Mustermann}
-\title{\thetitle}
-\date{\thedate}
-\institute{\theinstitute}
-\logo{\thelogo}
-
-
-% ---------------------------------------------------------------------------------------
 % setup beamer
 % ---------------------------------------------------------------------------------------
 % load base theme
 \usetheme[titleinfoot, toc, rainbow]{aiphi}
 % select dark colour theme
 \usecolortheme{aiphidark}
+
+
+% ---------------------------------------------------------------------------------------
+% document info
+% ---------------------------------------------------------------------------------------
+% these settings must be placed after loading the aiphi beamer theme
+
+% The license command doesn't like the \ccby in a \href for some reason.
+% But using an extra command to insert it is fine ¯\_(ツ)_/¯
+\newcommand{\thelicense}{\href{https://creativecommons.org/licenses/by/4.0}{\ccby}}
+
+\title{Fancy shmancy talk}
+
+% show author and contributors on title page and author + license in footline
+\newcommand{\theauthor}{Jan-Lukas Wynen}
+\author[\insertlicense\quad\theauthor]{
+  \textbf{\theauthor}
+  \and M. Sue
+  \and M. Mustermann}
+
+\date{\isodate\today}
+\institute{Institute for applied \LaTeX{}
+  \and Artsy Science School}
+
+% set the logo colour here because \insertlogo overwrites it somehow
+\logo{\color{aiphitext}\includegraphics[width=10mm]{logo.pdf}}
+
+% these are optional
+\license{\thelicense}
+\email{j-l.wynen@hotmail.de}
+\ghhandle{jl-wynen}
+% \titlegraphic[height=\paperheight]{beta-morph.png}
 
 
 % ---------------------------------------------------------------------------------------

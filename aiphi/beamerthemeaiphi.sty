@@ -17,6 +17,47 @@
 
 \mode<presentation>
 
+% custom meta data commands
+\newcommand\license[1]{%
+  \edef\insertlicense{%
+    \ifx\relax#1\relax\else
+    \noexpand#1%
+    \fi}%
+}%
+\license{}
+
+\newcommand\email[1]{%
+  \edef\insertemail{%
+    \ifx\relax#1\relax\else
+    \noexpand#1%
+    \fi}%
+}%
+\email{}
+
+\newcommand\ghhandle[1]{%
+  \edef\insertghhandle{%
+    \ifx\relax#1\relax\else
+    \noexpand#1%
+    \fi}%
+}%
+\ghhandle{}
+
+\renewcommand\titlegraphic[2][]{%
+  \edef\inserttitlegraphic{%
+    \ifx\relax#2\relax\else
+    \noexpand\includegraphics[#1]{#2}%
+    \fi}%
+}%
+\titlegraphic{}
+
+% insert some content (arg #2) if arg #1 is not empty
+\newcommand{\aiphi@condinsert}[2]{%
+  \setbox0=\hbox{#1\unskip}\ifdim\wd0=0pt
+  \else
+  #2%
+  \fi
+}
+
 % load sub packages
 \usecolortheme{aiphi}
 \useinnertheme{aiphi}

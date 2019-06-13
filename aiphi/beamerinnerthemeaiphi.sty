@@ -3,21 +3,74 @@
 % requirements
 \RequirePackage{adforn} % for arrowheads
 
-% title page
+
+% set up title page
 \setbeamertemplate{title page} {
-  \renewcommand*\item{\olditem[]}
   \thispagestyle{empty}
-  \vskip0pt plus 1filll
-  \begin{center}
-    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\\[3ex]
-    \insertauthor\\[2ex]
-    \insertdate\\[6ex]
-    {\small\insertinstitute}\\[5ex]
+
+  % background
+  \begin{textblock*}{\paperwidth} (0cm, 0cm)
+    \begin{tikzpicture}
+      \clip (0, 0) rectangle (\paperwidth, \paperheight);
+      % fill the page with the background colour
+      \fill[fill=aiphibackground] (0, 0) rectangle (\paperwidth, \paperheight);
+
+      % draw background graphic if one is specified
+      \aiphi@condinsert{\inserttitlegraphic}{\node[] at (.5\paperwidth, .5\paperheight) {\inserttitlegraphic};}
+
+      % draw rectangle below title and authors
+      \fill[fill=aiphibordeaux, opacity=0.7] (0, 0.33\paperheight) rectangle (\paperwidth, .6\paperheight);
+      % draw darker rectangle on bottom part to hide background image a bit
+      \fill[fill=aiphibackground, opacity=0.7] (0, 0) rectangle (\paperwidth, .33\paperheight);
+
+      % draw lines on red part
+      \foreach \y in {0.33, 0.34, ..., 0.6}
+      \draw[draw=aiphibordeaux!75!aiphibackground] (0, \y\paperheight) -- (\paperwidth, \y\paperheight);
+
+      % draw lines on bottom part
+      \foreach \y in {0.01, 0.02, ..., 0.33}
+      \draw[draw=aiphibackground!75!black] (0, \y\paperheight) -- (\paperwidth, \y\paperheight);
+    \end{tikzpicture}
+  \end{textblock*}
+
+  % title
+  \begin{textblock*}{\paperwidth} (0.05\paperwidth, 0.4\paperheight)
+    \vspace{0.5cm}
+    \textbf{\huge\inserttitle}\\
+    \vspace{0.5cm}
+    {\large\insertauthor}
+  \end{textblock*}
+
+  % institute
+  \begin{textblock*}{.7\paperwidth} (0.05\paperwidth, 0.7\paperheight)
+    \small\insertinstitute
+  \end{textblock*}
+
+  % date
+  \begin{textblock*}{.2\paperwidth} (0.75\paperwidth, 0.7\paperheight)
+    \hfill\insertdate
+  \end{textblock*}
+
+  % logo
+  % This might need to be tune a bit, it is set up for the FZ Jülich logo with width=25mm.
+  \begin{textblock*}{.4\paperwidth} (0.79\paperwidth, 0.87\paperheight)
     \insertlogo
-  \end{center}
-  \vskip0pt plus 1filll
-  \renewcommand*\item{\olditem[\adfrightarrowhead]}
-  \hfill\@ifundefined{thelicense}{}{\thelicense}
+  \end{textblock*}
+
+  % miscellaneous information
+  \begin{textblock*}{.7\paperwidth} (0.05\paperwidth, 0.92\paperheight)
+    \scriptsize
+    % license
+    \aiphi@condinsert{\insertlicense}{\insertlicense\hspace{10pt}}%
+    % email
+    \aiphi@condinsert{\insertemail}{\href{mailto:\insertemail}{%
+        \raisebox{-0.8pt}{\includegraphics[height=6pt]{aiphi/letter_icon.pdf}}\hspace{2pt}%
+        \tiny\dvfamily\insertemail}\hspace{10pt}}%
+    % GitHub
+    \aiphi@condinsert{\insertghhandle}{\href{https://github.com/\insertghhandle}{%
+        \raisebox{-1.7pt}{\includegraphics[height=8pt]{aiphi/github_mark.pdf}}%
+        \hspace{2pt}\tiny\dvfamily\insertghhandle}}
+  \end{textblock*}
 }
 
 % setup table of contents
