@@ -427,6 +427,34 @@ qpdf --stream-data=compress uncompressed.pdf image-no-colour.pdf
   \end{tikzpicture}
 \end{frame}
 
+\begin{frame}{TikZ Particles}
+  \begin{itemize}\setlength\itemsep{2em}
+  \item Baryons:
+    \begin{tikzpicture}
+      \tikzstyle{quark}=[circle, draw=none, inner sep=0pt, minimum size=1.25mm];
+      \tikzstyle{baryon}=[circle, draw=aiphitext!50!aiphibackground, fill=none, inner sep=0pt, minimum size=3mm, append after command={
+        +(0,0.75mm) node [quark, fill=aiphired] {}
+        +(0.65mm,-0.375mm) node [quark, fill=aiphigreen] {}
+        +(-0.65mm,-0.375mm) node [quark, fill=aiphiblue] {}
+      }];
+
+      \node [baryon] at (0, 0) {};
+    \end{tikzpicture}
+  \item Gluons (needs `snakes' TikZ library):
+    \begin{tikzpicture}
+      % this needs a bit of fine tuning to get the ends right
+      \tikzstyle{gluon}=[snake=coil, segment length=1mm];
+      \draw[gluon] (0,0) -- (9.4mm,0);
+    \end{tikzpicture}
+  \item Photons (also needs `snakes'):
+    \begin{tikzpicture}
+      % this needs a bit of fine tuning to get the ends right
+      \tikzstyle{photon}=[snake=coil, segment aspect=0];
+      \draw[photon] (0,0) -- (8.8mm,0);
+    \end{tikzpicture}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}\frametitle{Custom aiphi style for Matplotlib}
   \begin{center}
     \begin{enumerate}
