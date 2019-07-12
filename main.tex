@@ -509,9 +509,26 @@ qpdf --stream-data=compress uncompressed.pdf image-no-colour.pdf
 \backupbegin
 
 \begin{frame}[plain]
-  \begin{center}
-    {\Huge\usebeamercolor[fg]{frametitle}Backup Slides}
-  \end{center}
+  % background
+  \begin{textblock*}{\paperwidth} (0cm, 0cm)
+    \begin{tikzpicture}
+      \clip (0, 0) rectangle (\paperwidth, \paperheight);
+      % fill the page with the background colour
+      \fill[fill=aiphibackground] (0, 0) rectangle (\paperwidth, \paperheight);
+
+      % ------ insert background graphic here if you want one ------
+
+      % draw rectangle in centre
+      \fill[fill=aiphibackground!50!black, opacity=0.7] (0, 0.33\paperheight) rectangle (\paperwidth, .66\paperheight);
+
+      % draw lines on centre part
+      \foreach \y in {0.33, 0.34, ..., 0.66}
+      \draw[draw=aiphibackground!85!black] (0, \y\paperheight) -- (\paperwidth, \y\paperheight);
+
+      % Text
+      \node at (0.5\paperwidth, 0.5\paperheight) [align=center] {\Huge\usebeamercolor[fg]{frametitle}Backup Slides};
+    \end{tikzpicture}
+  \end{textblock*}
 \end{frame}
 
 \begin{frame}\frametitle{Appendix 1}
