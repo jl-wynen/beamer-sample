@@ -139,4 +139,21 @@
 \newcommand{\arxiv}[1]{\icite{arXiv}{\href{https://arxiv.org/abs/#1}{#1}}}
 \newcommand{\doi}[1]{\icite{doi}{\href{https://doi.org/#1}{#1}}}
 
+% box for function parameters in listings
+\NewTColorBox{parambox}{}{
+  enhanced,
+  hbox,  % shrink to horizontal width of content
+  nobeforeafter,  % place in line with text
+  tcbox raise base,  % adjust vertical position
+  boxrule=0.pt,
+  top=1pt, bottom=1pt, right=0mm, left=0mm,
+  arc=0pt,
+  boxsep=-0mm,
+  colframe=aiphitext!25!aiphibackground,
+  colback=aiphitext!25!aiphibackground,
+  coltext=aiphitext!95!aiphibackground,
+  fontupper=\tiny,
+}
+\newcommand{\fparam}[1]{\raisebox{1pt}{\begin{parambox}#1:\end{parambox}}}
+
 \endinput
