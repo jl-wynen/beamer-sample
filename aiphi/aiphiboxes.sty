@@ -11,8 +11,24 @@
 \RequirePackage[xparse, skins]{tcolorbox}
 \RequirePackage[absolute,overlay]{textpos}
 
-% box for itemizes
-\NewTColorBox{itembox}{m}{
+% box to highlight an item in an itemize / enumerate
+% takes two arguments: frame colour, extra arguments
+\NewTColorBox{itembox}{mm}{
+  enhanced jigsaw,
+  oversize,
+  left=8mm, right=1mm, bottom=1mm, top=1mm,
+  sharp corners,
+  boxrule=.6mm,
+  interior hidden,
+  coltext=aiphitext,
+  colframe=#1,
+  nobeforeafter,
+  #2
+}
+\newcommand{\boxeditem}[3]{\begin{itembox}{#1}{#2}#3\end{itembox}}
+
+% some generic box
+\NewTColorBox{genericbox}{m}{
   title=#1,
   noparskip,  % not using library parskip
   left=1mm, right=3mm, bottom=3mm, top=3mm,  % less for left to account for itemize

@@ -289,37 +289,37 @@ Law of Continuity:
 
 \begin{frame}\frametitle{Overlay boxes}
   \begin{textblock*}{60mm} (10mm,20mm)
-    \begin{itembox}{first block}
+    \begin{genericbox}{first block}
       \begin{itemize}
       \item And-a one
       \item And-a two
       \item And-a
       \end{itemize}
-    \end{itembox}
+    \end{genericbox}
   \end{textblock*}
 
   \only<2->{
     \begin{textblock*}{60mm} (20mm,28mm)
-      \begin{itembox}{second block}
+      \begin{genericbox}{second block}
         \begin{itemize}
         \item Foo
         \item Bar
         \item Baz
         \end{itemize}
-      \end{itembox}
+      \end{genericbox}
     \end{textblock*}
   }
 
   \only<3>{
     \begin{textblock*}{60mm} (30mm,36mm)
-      \begin{itembox}{third block}
+      \begin{genericbox}{third block}
         \begin{itemize}
         \item En
         \item To
         \item Tre
         \item Fire
         \end{itemize}
-      \end{itembox}
+      \end{genericbox}
     \end{textblock*}
   }
 \end{frame}
@@ -332,6 +332,19 @@ Law of Continuity:
   \begin{tagbox}{Title}{Tag}[aiphigreen][black]
     Tagged stuff
   \end{tagbox}
+\end{frame}
+
+\begin{frame}{Boxes in itemize}
+  \begin{itemize}
+  \item An item without box
+    \boxeditem{aiphiblue}{}{%
+    \item An item with default box
+    }
+    \boxeditem{aiphiyellow}{right=-70mm}{%
+    \item An item with a reduced box width
+    }
+  \end{itemize}
+  Note that \textbackslash{}setlength\{\textbackslash{}itemsep\} does not work properly.
 \end{frame}
 
 {
